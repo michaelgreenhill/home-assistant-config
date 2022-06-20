@@ -1,0 +1,741 @@
+homeassistant:
+  name: Selby
+  latitude: !secret selby_latitude
+  longitude: !secret selby_longitude
+  elevation: !secret selby_elevation
+  unit_system: metric
+  time_zone: Australia/Melbourne
+  packages: !include_dir_named include
+  external_url: https://hassio.selby.michaelgreenhill.net
+  
+  auth_providers:
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.178.0/24
+        - 127.0.0.1
+        - ::1
+      trusted_users:
+        192.168.178.109: !secret trusted_user_hash # michael
+      allow_bypass_login: true
+    - type: homeassistant
+
+  # Customization file
+  #customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+#introduction:
+
+# https://www.home-assistant.io/integrations/my/
+# Required for importing blueprints
+my: 
+
+# https://community.home-assistant.io/t/wunderground-data-uploader/330332
+# Required for wunderground uploader
+shell_command:
+  curl_get: 'curl -X GET {{ url }}'
+
+lovelace:
+  mode: yaml
+  resources:
+    - url: /hacsfiles/bar-card/bar-card.js
+      type: module
+    - url: /hacsfiles/kiosk-mode/kiosk-mode.js?v=1.6.5
+      type: module
+    - url: /hacsfiles/light-popup-card/light-popup-card.js
+      type: module
+    - url: /hacsfiles/lovelace-hui-element/hui-element.js
+      type: module
+    - url: /hacsfiles/lovelace-slider-entity-row/slider-entity-row.js
+      type: module
+    - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+      type: module
+    - url: /hacsfiles/swipe-card/swipe-card.js
+      type: module
+    - url: /hacsfiles/bom-weather-card/bom-weather-card.js
+      type: module
+    - url: /hacsfiles/weather-card/weather-card.js
+      type: module
+    - url: /hacsfiles/spotify-card/spotify-card.js
+      type: module
+    - url: 'https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&display=swap'
+      type: css
+    - url: /dwains_dashboard/cards/dwains-wrapper-card/dwains-wrapper-card.js?v=2.0.5
+      type: module
+    - url: /dwains_dashboard/cards/dwains-weather-card/dwains-weather-card.js?v=2.0.5
+      type: module
+    - url: /dwains_dashboard/cards/dwains-notification-card/dwains-notification-card.js?v=2.0.5
+      type: module
+    - url: /dwains_dashboard/cards/dwains-header-card/dwains-header-card.js?v=2.0.5
+      type: module
+    - url: /dwains_dashboard/cards/dwains-auto-entities-card/dwains-auto-entities-card.js?v=2.0.5
+      type: module
+    - url: /dwains_dashboard/js/dwains-dashboard.js?v=2.0.5
+      type: module
+    - url: /dwains_dashboard/cards/dwains-collapse-card/dwains-collapse-card.js?v=2.0.5
+      type: module
+    - url: /dwains_dashboard/cards/dwains-heading-card/dwains-heading-card.js?v=2.0.5
+      type: module
+    - url: /dwains_dashboard/cards/dwains-hash-switch-card/dwains-hash-switch-card.js?v=2.0.5
+      type: module
+    - url: /dwains_dashboard/cards/button-card/button-card.js?v=2.0.5
+      type: module
+    - url: /dwains_dashboard/cards/dwains-cover-card/dwains-cover-card.js?v=2.0.5
+      type: module
+    #- url: /dwains_dashboard/cards/light-entity-card/light-entity-card.js?v=2.0.5
+    #  type: module
+    - url: /dwains_dashboard/cards/dwains-flexbox-card/dwains-flexbox-card.js?v=2.0.5
+      type: module
+    - url: https://fonts.googleapis.com/css?family=Comfortaa&display=swap
+      type: css
+    - url: /hacsfiles/kb-better-graph-colors/kb-better-graph-colors.js
+      type: module
+    - url: /local/custom-gh.css
+      type: css
+    - url: /hacsfiles/lovelace-layout-card/layout-card.js
+      type: module
+    - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
+      type: module
+    - url: /hacsfiles/light-popup-card/light-popup-card.js
+      type: module
+    - url: /hacsfiles/compass-card/compass-card.js
+      type: module
+
+  dashboards:
+    lovelace-generated: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: notexist.yaml
+      title: Generated
+      icon: mdi:tools
+      show_in_sidebar: true
+      require_admin: true
+    lovelace-home:
+      mode: yaml
+      filename: ui-home2022.yaml
+      title: Home
+      icon: mdi:home
+      show_in_sidebar: true
+      require_admin: true
+    
+
+# Enables the frontend
+frontend:
+  themes: !include_dir_merge_named themes
+  extra_module_url: 
+    - /hacsfiles/lovelace-card-mod/card-mod.js
+
+# Enables configuration UI
+config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 192.168.178.37
+    - 192.168.178.33
+#   base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+#updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Sensors
+sensor:
+  #MariaDB Database Sensor
+  - platform: sql
+    db_url: !secret mariadb_url
+    scan_interval: 3600
+    queries:
+      - name: MariaDB Database Size
+        query: 'SELECT table_schema "homeassistant", Round(Sum(data_length + index_length) / POWER(1024,2), 1) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
+        column: "value"
+        unit_of_measurement: MB
+
+  - platform: sql
+    db_url: !secret mariadb_url
+    scan_interval: 60
+    queries:
+      - name: Selby Rainfall - 1 hour ago
+        query: "select state,state_id,last_updated from states where entity_id = 'sensor.backyard_rainfall_meter_rt' and last_updated < UTC_TIMESTAMP() - interval 1 hour order by last_updated DESC LIMIT 1;"
+        column: 'state'
+        unit_of_measurement: mm
+    
+  - platform: template
+    sensors:
+      hue_outdoor_motion_battery_level:
+        friendly_name: 'Front porch motion sensor battery'
+        value_template: '{{state_attr("binary_sensor.hue_outdoor_motion_sensor_1_motion", "battery_level")}}'
+        unit_of_measurement: '%'
+      living_room_temp:
+        friendly_name_template: '{{ states.climate.lounge_room_aircon.attributes["friendly name"] }} Current Temperature'
+        value_template: '{{ states.climate.lounge_room_aircon.attributes["current_temperature"] | float }}'
+        unit_of_measurement: "C"
+      living_room_humidity:
+        friendly_name_template: '{{ states.climate.lounge_room_aircon.attributes["friendly name"] }} Humidity'
+        value_template: '{{ states.climate.lounge_room_aircon.attributes["current_humidity"] | float }}'
+        unit_of_measurement: "%"
+    
+  - platform: template
+    sensors:
+      backyard_anemometer_wind_direction_corrected:
+        friendly_name: "Backyard anemometer - Wind direction corrected"
+        unique_id: "backyard_anemometer_wind_direction_corrected"
+        unit_of_measurement: "°"
+        value_template: >-
+          {% set t = states('sensor.backyard_anemometer_wind_direction') | float - 180 %}
+          {% if t > 0 %}{{ t }}
+          {% else %}{{ t + 360 }}
+          {% endif %}
+      weather_wind_dir:
+        friendly_name: "Backyard anemometer - Wind direction simple"
+        unique_id: "backyard_anemometer_wind_direction_simple"
+        value_template: >
+          {% set dir = states('sensor.backyard_anemometer_wind_direction_corrected')|float %}
+          {% if 11.25 < dir <= 33.75 %} NNE
+          {% elif 33.75 < dir <= 56.25 %} NE
+          {% elif 56.25 < dir <= 78.75 %} ENE
+          {% elif 78.75 < dir <= 101.25 %} E
+          {% elif 101.25 < dir <= 123.75 %} ESE
+          {% elif 123.75 < dir <= 146.25 %} SE
+          {% elif 146.25 < dir <= 168.75 %} SSE
+          {% elif 168.75 < dir <= 191.25 %} S
+          {% elif 191.25 < dir <= 213.75 %} SSW
+          {% elif 213.75 < dir <= 236.25 %} SW
+          {% elif 236.25 < dir <= 258.75 %} WSW
+          {% elif 258.75 < dir <= 281.25 %} W
+          {% elif 281.25 < dir <= 303.75 %} WNW
+          {% elif 303.75 < dir <= 326.25 %} NW
+          {% elif 326.25 < dir <= 348.75 %} NNW
+          {% else %} N
+          {% endif %}
+  
+  # TP Link
+#  - platform: template
+#    sensors:
+#      living_room_tv_amps:
+#        friendly_name_template: "{{ states.switch.living_room_tv.name}} Current"
+#        value_template: '{{ states.switch.living_room_tv.attributes["current_a"] | float }}'
+#        unit_of_measurement: "A"
+#      living_room_tv_watts:
+#        friendly_name_template: "{{ states.switch.living_room_tv.name}} Current Consumption"
+#        value_template: '{{ states.switch.living_room_tv.attributes["current_power_w"] | float }}'
+#        unit_of_measurement: "W"
+#      living_room_tv_total_kwh:
+#        friendly_name_template: "{{ states.switch.living_room_tv.name}} Total Consumption"
+#        value_template: '{{ states.switch.living_room_tv.attributes["total_energy_kwh"] | float }}'
+#        unit_of_measurement: "kWh"
+#      living_room_tv_volts:
+#        friendly_name_template: "{{ states.switch.living_room_tv.name}} Voltage"
+#        value_template: '{{ states.switch.living_room_tv.attributes["voltage"] | float }}'
+#        unit_of_measurement: "V"
+#      living_room_tv_today_kwh:
+#        friendly_name_template: "{{ states.switch.living_room_tv.name}} Today's Consumption"
+#        value_template: '{{ states.switch.living_room_tv.attributes["today_energy_kwh"] | float }}'
+#        unit_of_measurement: "kWh"
+
+#      shed_amps:
+#        friendly_name_template: "{{ states.switch.shed.name}} Current"
+#        value_template: '{{ states.switch.shed.attributes["current_a"] | float }}'
+#        unit_of_measurement: "A"
+#      shed_watts:
+#        friendly_name_template: "{{ states.switch.shed.name}} Current Consumption"
+#        value_template: '{{ states.switch.shed.attributes["current_power_w"] | float }}'
+#        unit_of_measurement: "W"
+#      shed_total_kwh:
+#        friendly_name_template: "{{ states.switch.shed.name}} Total Consumption"
+#        value_template: '{{ states.switch.shed.attributes["total_energy_kwh"] | float }}'
+#        unit_of_measurement: "kWh"
+#      shed_volts:
+#        friendly_name_template: "{{ states.switch.shed.name}} Voltage"
+#        value_template: '{{ states.switch.shed.attributes["voltage"] | float }}'
+#        unit_of_measurement: "V"
+#      shed_today_kwh:
+#        friendly_name_template: "{{ states.switch.shed.name}} Today's Consumption"
+#        value_template: '{{ states.switch.shed.attributes["today_energy_kwh"] | float }}'
+#        unit_of_measurement: "kWh"
+
+#      freezer_amps:
+#        friendly_name_template: "{{ states.switch.michael_s_heater_2.name}} Current"
+#        value_template: '{{ states.switch.michael_s_heater_2.attributes["current_a"] | float }}'
+#        unit_of_measurement: "A"
+#      freezer_watts:
+#        friendly_name_template: "{{ states.switch.michael_s_heater_2.name}} Current Consumption"
+#        value_template: '{{ states.switch.michael_s_heater_2.attributes["current_power_w"] | float }}'
+#        unit_of_measurement: "W"
+#      freezer_total_kwh:
+#        friendly_name_template: "{{ states.switch.michael_s_heater_2.name}} Total Consumption"
+#        value_template: '{{ states.switch.michael_s_heater_2.attributes["total_energy_kwh"] | float }}'
+#        unit_of_measurement: "kWh"
+#      freezer_volts:
+#        friendly_name_template: "{{ states.switch.michael_s_heater_2.name}} Voltage"
+#        value_template: '{{ states.switch.michael_s_heater_2.attributes["voltage"] | float }}'
+#        unit_of_measurement: "V"
+#      freezer_today_kwh:
+#        friendly_name_template: "{{ states.switch.michael_s_heater_2.name}} Today's Consumption"
+#        value_template: '{{ states.switch.michael_s_heater_2.attributes["today_energy_kwh"] | float }}'
+#        unit_of_measurement: "kWh"
+
+  - platform: qbittorrent
+    url: "http://192.168.178.41:8113/"
+    username: !secret qbittorrent_username
+    password: !secret qbittorrent_password
+
+  # Tracking entity to entity
+  - platform: google_travel_time
+    name: Phone To Home
+    api_key: !secret google_maps_api_key
+    origin: device_tracker.pixel_5
+    destination: zone.selby
+    scan_interval: 1800
+
+  - platform: google_travel_time
+    name: Phone To Work
+    api_key: !secret google_maps_api_key
+    origin: device_tracker.pixel_5
+    destination: zone.Money3
+    scan_interval: 1800
+  
+  - platform: statistics
+    name: Average wind speed over the last 24 hours
+    unique_id: "avg_wind_speed_24hours"
+    entity_id: sensor.backyard_anemometer_average_wind_speed
+    state_characteristic: value_max
+    max_age: 
+      hours: 24
+  
+  - platform: statistics
+    name: Rainfall over the last 1 hour
+    unique_id: "max_rainfall_1_hour"
+    entity_id: sensor.backyard_rainfall_meter_rt
+    state_characteristic: value_max
+    max_age: 
+      hours: 1
+  
+  - platform: statistics
+    name: Rainfall over the last 24 hours
+    unique_id: "max_rainfall_24_hours"
+    entity_id: sensor.backyard_rainfall_meter_rt
+    state_characteristic: value_max
+    max_age: 
+      hours: 24
+  
+  - platform: statistics
+    name: Outdoor max temperature last 12 hours
+    unique_id: "max_outdoor_temperature_12_hours"
+    entity_id: sensor.frontdoor_temperature
+    state_characteristic: value_max
+    max_age: 
+      hours: 12
+  
+  - platform: statistics
+    name: Outdoor min temperature last 12 hours
+    unique_id: "min_outdoor_temperature_12_hours"
+    entity_id: sensor.frontdoor_temperature
+    state_characteristic: value_min
+    max_age: 
+      hours: 12
+
+binary_sensor:
+  - platform: threshold
+    entity_id: sensor.living_room_temp
+    lower: 16
+    upper: 24
+    hysteresis: 0.0
+    name: living_room_temp_threshold
+
+# Text to speech
+#tts:
+#  - platform: google
+
+# Cloud
+cloud:
+
+tplink:
+  discovery: true
+#  strip:
+#    - host: 192.168.178.101
+  switch:
+    - host: 192.168.178.102
+    - host: 192.168.178.104
+    - host: 192.168.178.153
+
+mobile_app:
+
+climate:
+  - platform: sensibo
+    api_key: !secret sensibo_api_key
+
+stream:
+  ll_hls: true
+
+#camera:
+#  - platform: uvc
+#    nvr: 192.168.178.59
+#    port: 7080
+#    key: !secret unifi_video_api_key
+#    password: !secret unifi_video_password
+#  - platform: generic
+#    name: SelbyFosC1
+#    still_image_url: !secret fosc1_url
+#    stream_source: "rtsp://192.168.178.11:554/videoMain"
+#    username: !secret fosc1_user
+#    password: !secret focs1_pass
+#  - platform: generic
+#    name: selby-ubnt-g3-01
+#    still_image_url: "http://192.168.178.53/snap.jpeg"
+#    stream_source: "rtsp://192.168.178.59:7447/gx1PAZd4fT1l6TVj"
+#    verify_ssl: false
+#  - platform: generic
+#    name: selby-ubnt-g3-02
+#    still_image_url: "http://192.168.178.54/snap.jpeg"
+#    stream_source: "rtsp://192.168.178.59:7447/o39gfIAIoRUWN5du"
+#    verify_ssl: false
+#  - platform: generic
+#    name: selby-ubnt-g3-03
+#    still_image_url: "http://192.168.178.55/snap.jpeg"
+#    stream_source: "rtsp://192.168.178.59:7447/N3htkkr8anyAHePv"
+#    verify_ssl: false
+#  - platform: generic
+#    name: selby-ubnt-g3-04
+#    still_image_url: "http://192.168.178.56/snap.jpeg"
+#    stream_source: "rtsp://192.168.178.59:7447/pxERPgAAmZJpJ1Af"
+#    verify_ssl: false
+
+media_player:
+
+speedtestdotnet:
+  scan_interval: "06:00:00"
+
+zone:
+  - name: Money3
+    icon: mdi:briefcase
+    latitude: !secret work_latitude
+    longitude: !secret work_longitude
+  - name: Selby
+    icon: mdi:house
+    latitude: !secret selby_latitude
+    longitude: !secret selby_longitude
+    radius: 100
+
+prometheus:
+
+switch:
+  - platform: template
+    switches:
+      ac:
+        friendly_name: "AC"
+        value_template: "{{ is_state('climate.lounge_room_aircon', 'cool') or is_state('climate.lounge_room_aircon', 'heat') or is_state('climate.lounge_room_aircon', 'dry') or is_state('climate.lounge_room_aircon', 'fan_only') }}"
+        turn_on:
+          service: climate.set_hvac_mode
+          data:
+            entity_id: climate.lounge_room_aircon
+            hvac_mode: cool
+        turn_off:
+          service: climate.set_hvac_mode
+          data:
+            entity_id: climate.lounge_room_aircon
+            hvac_mode: off
+
+recorder:
+  auto_purge: true
+  purge_keep_days: 14
+  commit_interval: 5
+  db_url: !secret mariadb_url
+  exclude:
+    domains:
+      - automation
+      - updater
+      - media_player
+      - device_tracker
+    entity_globs:
+      - sensor.weather_*
+    entities:
+      - sun.sun # Don't record sun data
+      - sensor.last_boot # Comes from 'systemmonitor' sensor platform
+      - sensor.date
+    event_types:
+      - call_service # Don't record service calls
+
+logbook:
+  exclude:
+    domains:
+      - media_player
+      - device_tracker
+      - updater
+    entities:
+      - sensor.date
+
+influxdb:  
+  host: !secret influxdb_hostname
+  ssl: true
+  port: 443
+  api_version: 2
+  token: !secret influxdb_token
+  organization: !secret influxdb_org
+  bucket: homeassistant
+  max_retries: 3
+  default_measurement: state
+  include: #Include Domain
+    entities:
+      - sensor.frontdoor_temperature
+      - sensor.living_room_temp
+      - sensor.living_room_humidity
+      - sensor.lumi_lumi_sensor_magnet_aq2_device_temperature
+      - sensor.backyard_rainfall_meter_rt
+
+system_health:
+
+
+input_select:
+  # this is referenced by automations for the Ikea Tradfri 5-way button, to set the living room lights.
+  cycle_hue_scenes:
+    name: Cycle Philips Hue Scenes
+    options:
+      - Bright
+      - Relax
+      - Nightlight
+      - Energize
+      - Dimmed
+      - Savanna sunset
+      - Concentrate
+      - Tropical twilight
+      - Read
+      - Spring blossom
+      - Arctic aurora
+    initial: Read
+    icon: mdi:lamps
+
+notify:
+  - name: "Amazon SES"
+    platform: smtp
+    sender: !secret email_from_address
+    recipient: !secret email_to_address
+    server: email-smtp.ap-southeast-2.amazonaws.com
+    port: 587
+    encryption: starttls
+    username: !secret amazon_ses_username
+    password: !secret amazon_ses_password
+
+google_assistant:
+  project_id: home-assistant-69fa7
+  service_account: !include secret-google-serviceaccount.json
+  report_state: true
+  secure_devices_pin: "3005"
+  expose_by_default: false
+  exposed_domains:
+    - lock
+    - climate
+    - scene
+    - camera
+    - sensor
+  entity_config:
+    camera.selby_ubnt_g3_01_medium: 
+      name: "Front yard camera"
+      expose: true
+    camera.selby_ubnt_g3_02_medium:
+      name: "Driveway camera"
+      expose: true
+    camera.selby_ubnt_g3_03_medium:
+      name: "Gazebo camera"
+      expose: true
+    camera.selby_ubnt_g3_04_medium: 
+      name: "Back yard camera"
+      expose: true
+    camera.front_door:
+      name: "Doorbell camera"
+      expose: true
+      room: "Front porch"
+    lock.front_door_lock_8cfff910_door_lock:
+      name: "Front door lock"
+      expose: true
+      room: "Front porch"
+    sensor.frontdoor_temperature: 
+      expose: true
+      name: "Outdoor temperature"
+      room: "Front porch"
+    sensor.living_room_temp:
+      expose: true
+      name: "Indoor temperature"
+      room: "Living room"
+      aliases: 
+        - "Living room temperature"
+        - "Lounge room temperature"
+        - "Inside temperature"
+    sensor.selby_rainfall_daily:
+      expose: true
+      name: "Daily rainfall"
+      room: "Backyard"
+    sensor.selby_rainfall_weekly:
+      expose: true
+      name: "Weekly rainfall"
+      room: "Backyard"
+    
+
+#  entity_config:
+#    switch.kitchen:
+#      name: CUSTOM_NAME_FOR_GOOGLE_ASSISTANT
+#      aliases:
+#        - BRIGHT_LIGHTS
+#        - ENTRY_LIGHTS
+#    light.living_room:
+#      expose: false
+#      room: LIVING_ROOM
+
+localtuya:
+  - host: "192.168.178.111"
+    device_id: !secret inkbird_ibbq4t_device_id
+    local_key: !secret inkbird_ibbq4t_local_key
+    friendly_name: "Inkbird iBBQ-4T"
+    protocol_version: "3.3"
+    scan_interval: 20 # optional, only needed if energy monitoring values are not updating
+      #seconds: 20 # Values less than 10 seconds may cause stability issues
+    entities:
+      - platform: binary_sensor
+        friendly_name: Plug Status
+        id: 1
+        device_class: power
+        state_on: "true" # Optional
+        state_off: "false" # Optional
+      - platform: sensor
+        friendly_name: Battery percentage
+        id: 101
+        unit_of_measurement: "%"
+      - platform: binary_sensor
+        friendly_name: Alert state
+        id: 105
+        state_on: "true" # Optional
+        state_off: "false" # Optional
+      - platform: sensor
+        friendly_name: Preset temperature
+        id: 106
+        unit_of_measurement: "°F"
+      - platform: sensor
+        friendly_name: Preset temperature
+        id: 106
+        scaling: 0.01
+        unit_of_measurement: "°F"
+      - platform: sensor
+        friendly_name: Probe 1 temperature
+        id: 107
+        unit_of_measurement: "°F"
+        scaling: 0.01
+      - platform: sensor
+        friendly_name: Probe 2 temperature
+        id: 108
+        unit_of_measurement: "°F"
+        scaling: 0.01
+      - platform: sensor
+        friendly_name: Probe 3 temperature
+        id: 109
+        unit_of_measurement: "°F"
+        scaling: 0.01
+      - platform: sensor
+        friendly_name: Probe 4 temperature
+        id: 110
+        unit_of_measurement: "°F"
+        scaling: 0.01
+      - platform: sensor
+        friendly_name: Temperature unit
+        id: 19
+        
+
+      #- platform: cover
+      #  friendly_name: Device Cover
+      #  id: 2
+      #  open_close_cmds: ["on_off","open_close"] # Optional, default: "on_off"
+      #  positioning_mode: ["none","position","timed"] # Optional, default: "none"
+      #  currpos_dps: 3 # Optional, required only for "position" mode
+      #  setpos_dps: 4  # Optional, required only for "position" mode
+      #  span_time: 25  # Full movement time: Optional, required only for "timed" mode
+
+      #- platform: fan
+      #  friendly_name: Device Fan
+      #  id: 3 # dps for on/off state
+      #  fan_direction: 4 # Optional, dps for fan direction
+      #  fan_direction_fwd: forward # String for the forward direction
+      #  fan_direction_rev: reverse # String for the reverse direction
+      #  fan_ordered_list: low,medium,high,auto # Optional, If this is used it will not use the min and max integers.
+      #  fan_oscilating_control: 4 # Optional, dps for fan osciallation
+      #  fan_speed_control: 3 # Optional, if ordered list not used, dps for speed control
+      #  fan_speed_min: 1 # Optional, if ordered list not used, minimum integer for speed range
+      #  fan_speed_max: 10 # Optional, if ordered list not used, maximum integer for speed range
+
+
+      #- platform: light
+      #  friendly_name: Device Light
+      #  id: 4 # Usually 1 or 20
+      #  color_mode: 21 # Optional, usually 2 or 21, default: "none"
+      #  brightness: 22 # Optional, usually 3 or 22, default: "none"
+      #  color_temp: 23 # Optional, usually 4 or 23, default: "none"
+      #  color_temp_reverse: false # Optional, default: false
+      #  color: 24 # Optional, usually 5 (RGB_HSV) or 24 (HSV), default: "none"
+      #  brightness_lower: 29 # Optional, usually 0 or 29, default: 29
+      #  brightness_upper: 1000 # Optional, usually 255 or 1000, default: 1000
+      #  color_temp_min_kelvin: 2700 # Optional, default: 2700
+      #  color_temp_max_kelvin: 6500 # Optional, default: 6500
+      #  scene: 25 # Optional, usually 6 (RGB_HSV) or 25 (HSV), default: "none"
+      #  music_mode: False # Optional, some use internal mic, others, phone mic. Only internal mic is supported, default: "False"
+
+      #- platform: sensor
+      #  friendly_name: Plug Voltage
+      #  id: 20
+      #  scaling: 0.1 # Optional
+      #  device_class: voltage # Optional
+      #  unit_of_measurement: "V" # Optional
+
+      #- platform: switch
+      #  friendly_name: Plug
+      #  id: 1
+      #  current: 18 # Optional
+      #  current_consumption: 19 # Optional
+      #  voltage: 20 # Optional
+
+mqtt:
+  #discovery: true
+  discovery_prefix: homeassistant
+  sensor:
+    - name: "Backyard Anemometer - Average wind speed"
+      unique_id: "backyard_anemometer_average_wind_speed"
+      unit_of_measurement: "km/h"
+      state_topic: "rtl_433/+/devices/EcoWitt-WS68/+/wind_avg_raw"
+    - name: "Backyard Anemometer - Max wind speed"
+      unique_id: "backyard_anemometer_max_wind_speed"
+      unit_of_measurement: "km/h"
+      state_topic: "rtl_433/+/devices/EcoWitt-WS68/+/wind_max_raw"
+    - name: "Backyard Anemometer - Wind direction"
+      unique_id: "backyard_anemometer_wind_direction"
+      state_topic: "rtl_433/+/devices/EcoWitt-WS68/+/wind_dir_deg"
+      unit_of_measurement: "°"
+    - name: "Backyard Anemometer - Lux"
+      unique_id: "backyard_anemometer_lux"
+      state_topic: "rtl_433/+/devices/EcoWitt-WS68/+/lux_raw"
+
+
+      
+
+  
+browser_mod:
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+light: !include lights.yaml
