@@ -46,3 +46,13 @@ www/community
 
 # Temporary ignores
 .old_config
+
+# Other shit
+DKVHUZ~V
+asuswrt.pem
+dwains-dashboard/
+secret-google-serviceaccount.json
+www/icons
+www/sound
+www/community
+.uuid
