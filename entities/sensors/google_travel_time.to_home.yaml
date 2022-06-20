@@ -1,0 +1,10 @@
+---
+
+# Updates the travel time from my phone's position to home.
+
+platform: google_travel_time
+name: Phone To Home
+api_key: !secret google_maps_api_key
+origin: device_tracker.pixel_5
+destination: zone.selby
+scan_interval: 1800

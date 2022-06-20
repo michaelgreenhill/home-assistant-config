@@ -1,0 +1,10 @@
+---
+
+# Updates the travel time from my phone to work
+
+platform: google_travel_time
+name: Phone To Work
+api_key: !secret google_maps_api_key
+origin: device_tracker.pixel_5
+destination: zone.Money3
+scan_interval: 1800

@@ -1,0 +1,14 @@
+---
+
+# Monitor the size of the MariaDB database size - allows for alerting if the size goes mental
+# @author Michael Greenhill
+# @updated 2022-06-20
+
+platform: sql
+db_url: !secret mariadb_url
+scan_interval: 3600
+queries:
+  - name: MariaDB Database Size
+    query: 'SELECT table_schema "homeassistant", Round(Sum(data_length + index_length) / POWER(1024,2), 1) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
+    column: "value"
+    unit_of_measurement: MB

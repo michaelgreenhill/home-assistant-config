@@ -1,0 +1,9 @@
+---
+
+platform: statistics
+name: Average wind speed over the last 24 hours
+unique_id: "avg_wind_speed_24hours"
+entity_id: sensor.backyard_anemometer_average_wind_speed
+state_characteristic: value_max
+max_age: 
+  hours: 24

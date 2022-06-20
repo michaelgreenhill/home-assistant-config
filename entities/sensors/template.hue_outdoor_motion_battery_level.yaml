@@ -1,0 +1,13 @@
+---
+
+# Get a nicer name for the Philips Hue outdoor motion sensor battery level
+# Largely redundant - HA noob business
+# @author Michael Greenhill
+# @updated 2022-06-20
+
+platform: template
+sensors:
+  hue_outdoor_motion_battery_level:
+    friendly_name: 'Front porch motion sensor battery'
+    value_template: '{{state_attr("binary_sensor.hue_outdoor_motion_sensor_1_motion", "battery_level")}}'
+    unit_of_measurement: '%'

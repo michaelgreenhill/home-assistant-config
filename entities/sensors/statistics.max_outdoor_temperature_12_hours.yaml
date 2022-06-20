@@ -1,0 +1,13 @@
+---
+
+# Get the maximum outdoor temperature for the last 12 hours
+# @author Michael Greenhill
+# @updated 2022-06-20
+
+platform: statistics
+name: Outdoor max temperature last 12 hours
+unique_id: "max_outdoor_temperature_12_hours"
+entity_id: sensor.frontdoor_temperature
+state_characteristic: value_max
+max_age: 
+  hours: 12

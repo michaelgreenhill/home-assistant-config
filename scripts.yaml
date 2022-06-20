@@ -1,25 +1,13 @@
-movie_time:
-  alias: Movie time
-  sequence:
-  - type: turn_on
-    device_id: 82aa03338a6b4fe79260b4e84d1675e7
-    entity_id: switch.living_room_tv
-    domain: switch
-  - service: scene.turn_on
-    target:
-      entity_id: scene.living_room_relax
-    metadata: {}
-  - type: turn_off
-    device_id: a8b64e55ded335ad42689a13a8a10a6b
-    entity_id: light.kitchen_2
-    domain: light
-  - type: turn_off
-    device_id: 59ab44e96aadd4a3d7ae78438730b5fe
-    entity_id: light.dining
-    domain: light
-  - type: turn_off
-    device_id: 69f262847f533646349544da7b584f10
-    entity_id: light.living_room_lamp_1
-    domain: light
-  mode: single
-  icon: mdi:presentation-play
+---
+# This file is used by the scripts editor
+# in the Home Assistant frontend.
+#
+# I personally do not use it, mainly because I like doing this in YAML.
+# However, from time to time, it is helpful to click a bit and see
+# what the frontend makes of it.
+#
+# This file must exist for the frontend scripts editor to work.
+# Hence, it is here, empty.
+#
+# If you are looking for my scripts: See scripts folder.
+{}

@@ -1,0 +1,6 @@
+---
+# Rip out the binary sensors from configuration.yaml and put them into discrete config files
+#
+
+#binary_sensor: !include ../binary_sensors.yaml
+binary_sensor split: !include_dir_list ../entities/binary_sensors

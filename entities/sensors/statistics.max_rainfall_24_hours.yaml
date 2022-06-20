@@ -1,0 +1,9 @@
+---
+
+platform: statistics
+name: Rainfall over the last 24 hours
+unique_id: "max_rainfall_24_hours"
+entity_id: sensor.backyard_rainfall_meter_rt
+state_characteristic: value_max
+max_age: 
+  hours: 24

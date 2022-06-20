@@ -1,0 +1,5 @@
+---
+# Rip out the sensors from configuration.yaml and put them into discrete config files
+
+#sensor: !include ../sensors.yaml
+sensor split: !include_dir_list ../entities/sensors

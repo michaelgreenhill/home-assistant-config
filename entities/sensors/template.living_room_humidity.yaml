@@ -1,0 +1,8 @@
+---
+
+platform: template
+sensors:
+  living_room_humidity:
+    friendly_name_template: '{{ states.climate.lounge_room_aircon.attributes["friendly name"] }} Humidity'
+    value_template: '{{ states.climate.lounge_room_aircon.attributes["current_humidity"] | float }}'
+    unit_of_measurement: "%"

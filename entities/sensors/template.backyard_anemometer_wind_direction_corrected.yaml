@@ -1,0 +1,40 @@
+---
+
+# Get a human-readable direction/heading from a bearing
+# Stolen from Home Assistant community
+# @updated 2022-06-20
+# @author Michael Greenhill
+
+platform: template
+sensors:
+  backyard_anemometer_wind_direction_corrected:
+    friendly_name: "Backyard anemometer - Wind direction corrected"
+    unique_id: "backyard_anemometer_wind_direction_corrected"
+    unit_of_measurement: "°"
+    value_template: >-
+      {% set t = states('sensor.backyard_anemometer_wind_direction') | float - 180 %}
+      {% if t > 0 %}{{ t }}
+      {% else %}{{ t + 360 }}
+      {% endif %}
+  weather_wind_dir:
+    friendly_name: "Backyard anemometer - Wind direction simple"
+    unique_id: "backyard_anemometer_wind_direction_simple"
+    value_template: >
+      {% set dir = states('sensor.backyard_anemometer_wind_direction_corrected')|float %}
+      {% if 11.25 < dir <= 33.75 %} NNE
+      {% elif 33.75 < dir <= 56.25 %} NE
+      {% elif 56.25 < dir <= 78.75 %} ENE
+      {% elif 78.75 < dir <= 101.25 %} E
+      {% elif 101.25 < dir <= 123.75 %} ESE
+      {% elif 123.75 < dir <= 146.25 %} SE
+      {% elif 146.25 < dir <= 168.75 %} SSE
+      {% elif 168.75 < dir <= 191.25 %} S
+      {% elif 191.25 < dir <= 213.75 %} SSW
+      {% elif 213.75 < dir <= 236.25 %} SW
+      {% elif 236.25 < dir <= 258.75 %} WSW
+      {% elif 258.75 < dir <= 281.25 %} W
+      {% elif 281.25 < dir <= 303.75 %} WNW
+      {% elif 303.75 < dir <= 326.25 %} NW
+      {% elif 326.25 < dir <= 348.75 %} NNW
+      {% else %} N
+      {% endif %}

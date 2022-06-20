@@ -1,0 +1,8 @@
+---
+
+# Allows for monitoring of qbittorrent
+
+platform: qbittorrent
+url: "http://192.168.178.41:8113/"
+username: !secret qbittorrent_username
+password: !secret qbittorrent_password

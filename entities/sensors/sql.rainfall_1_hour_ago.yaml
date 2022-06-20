@@ -1,0 +1,12 @@
+---
+
+# Get the rainfall in the last hour. When it works, it will be used for precipitation rate on wunderground.com
+
+platform: sql
+db_url: !secret mariadb_url
+scan_interval: 60
+queries:
+  - name: Selby Rainfall - 1 hour ago
+    query: "select state,state_id,last_updated from states where entity_id = 'sensor.backyard_rainfall_meter_rt' and last_updated < UTC_TIMESTAMP() - interval 1 hour order by last_updated DESC LIMIT 1;"
+    column: 'state'
+    unit_of_measurement: mm

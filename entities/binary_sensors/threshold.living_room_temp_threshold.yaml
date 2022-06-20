@@ -1,0 +1,8 @@
+---
+
+platform: threshold
+entity_id: sensor.living_room_temp
+lower: 16
+upper: 24
+hysteresis: 0.0
+name: living_room_temp_threshold
