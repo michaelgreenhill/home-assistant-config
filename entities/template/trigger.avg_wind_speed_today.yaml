@@ -1,0 +1,25 @@
+---
+# Tell me the higest value of sensor.backyard_anemometer_avg_wind_speed today
+# Resets at midnight every day
+# @author Michael Greenhill
+# @updated 2022-06-22
+
+trigger:
+  - platform: time_pattern
+    hours: 0
+    minutes: 0
+    id: 'midnight'
+  - platform: state
+    entity_id: sensor.backyard_anemometer_avg_wind_speed
+    id: 'change'
+sensor:
+  - name: Average wind speed today
+    unique_id: avg_wind_speed_today
+    icon: mdi:weather-windy
+    state: >
+      {% set outt = states('sensor.backyard_anemometer_max_wind_speed')|float(None) %}
+      {% set maxt = states('sensor.max_wind_speed_today')|float(None) %}
+      {% if  outt != None  and (trigger.id == 'midnight' or maxt == None
+        or outt > maxt) %} {{ outt }}
+      {% else %} {{ maxt }} {% endif %}
+    unit_of_measurement: "km/h"
