@@ -183,39 +183,6 @@ climate:
 stream:
   ll_hls: true
 
-#camera:
-#  - platform: uvc
-#    nvr: 192.168.178.59
-#    port: 7080
-#    key: !secret unifi_video_api_key
-#    password: !secret unifi_video_password
-#  - platform: generic
-#    name: SelbyFosC1
-#    still_image_url: !secret fosc1_url
-#    stream_source: "rtsp://192.168.178.11:554/videoMain"
-#    username: !secret fosc1_user
-#    password: !secret focs1_pass
-#  - platform: generic
-#    name: selby-ubnt-g3-01
-#    still_image_url: "http://192.168.178.53/snap.jpeg"
-#    stream_source: "rtsp://192.168.178.59:7447/gx1PAZd4fT1l6TVj"
-#    verify_ssl: false
-#  - platform: generic
-#    name: selby-ubnt-g3-02
-#    still_image_url: "http://192.168.178.54/snap.jpeg"
-#    stream_source: "rtsp://192.168.178.59:7447/o39gfIAIoRUWN5du"
-#    verify_ssl: false
-#  - platform: generic
-#    name: selby-ubnt-g3-03
-#    still_image_url: "http://192.168.178.55/snap.jpeg"
-#    stream_source: "rtsp://192.168.178.59:7447/N3htkkr8anyAHePv"
-#    verify_ssl: false
-#  - platform: generic
-#    name: selby-ubnt-g3-04
-#    still_image_url: "http://192.168.178.56/snap.jpeg"
-#    stream_source: "rtsp://192.168.178.59:7447/pxERPgAAmZJpJ1Af"
-#    verify_ssl: false
-
 media_player:
 
 speedtestdotnet:
