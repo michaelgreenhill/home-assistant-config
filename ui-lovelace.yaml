@@ -1,0 +1,384 @@
+button_card_templates: !include button_card_templates.yaml
+
+title: Haus
+views:
+  - title: Controls
+    background: center / cover no-repeat url("/local/background.png") fixed
+    path: home
+    panel: false
+    icon: 'mdi:home'
+    badges: []
+    theme: tablet
+    cards:
+      - type: grid
+        square: true
+        columns: 2
+        cards:
+          - type: custom:button-card
+            tap_action:
+              action: toggle
+            entity: switch.living_room_tv
+            triggers_update: input_boolean.living_room_tv
+            name: TV
+            show_state: true
+            template:
+              - default
+          - type: custom:button-card
+            tap_action:
+              action: toggle
+            entity: switch.coffee_machine
+            name: Coffee machine
+            show_state: true
+            template:
+              - default
+          - type: custom:button-card
+            entity: light.loungeroom
+            name: Lounge room lights
+            template:
+              - light
+              - icon_shade
+          - type: custom:button-card
+            entity: light.kitchen_2
+            name: Kitchen lights
+            template:
+              - light
+              - icon_hue
+  - title: Climate
+    theme: tablet
+    path: climate
+    background: center / cover no-repeat url("/local/background.png") fixed
+    icon: 'mdi:weather-pouring'
+    badges: []
+    cards:
+      - type: thermostat
+        entity: climate.lounge_room_aircon
+        card_mod:
+          style: |
+            ha-card { 
+              background-color: rgba(115, 115, 115, 0.2);
+              border-radius: 0.8rem;
+              transition: none 0s ease 0s;
+              color: rgba(255, 255, 255, 0.3);
+            }
+      - type: grid
+        columns: 2
+        cards:
+          - type: sensor
+            entity: sensor.living_room_temp
+            name: Inside
+            graph: line
+            detail: 1
+            hours_to_show: 12
+            card_mod:
+              style: |
+                ha-card { 
+                  background-color: rgba(115, 115, 115, 0.2);
+                  border-radius: 0.8rem;
+                  transition: none 0s ease 0s;
+                  color: rgba(255, 255, 255, 0.3);
+                  overflow: hidden;
+                }
+          - type: sensor
+            entity: sensor.hue_outdoor_motion_sensor_1_temperature
+            graph: line
+            name: Outside
+            hours_to_show: 12
+            card_mod:
+              style: |
+                ha-card { 
+                  background-color: rgba(115, 115, 115, 0.2);
+                  border-radius: 0.8rem;
+                  transition: none 0s ease 0s;
+                  color: rgba(255, 255, 255, 0.3);
+                  overflow: hidden;
+                }
+      - type: weather-forecast
+        entity: weather.openweathermap
+        secondary_info_attribute: humidity
+        card_mod:
+          style: |
+            ha-card { 
+              background-color: rgba(115, 115, 115, 0.2);
+              border-radius: 0.8rem;
+              transition: none 0s ease 0s;
+              color: rgba(255, 255, 255, 0.3);
+            }
+  - title: Upper Gully
+    theme: tablet
+    path: upper-gully
+    background: center / cover no-repeat url("/local/background.png") fixed
+    icon: 'mdi:flash'
+    badges: []
+    cards:
+      - cards:
+          - cards:
+              - type: grid
+                title: Battery levels
+                square: true
+                columns: 3
+                cards:
+                  - type: custom:button-card
+                    entity: sensor.front_door_battery
+                    name: Doorbell
+                    show_state: true
+                    template:
+                      - default
+                  - type: custom:button-card
+                    entity: sensor.kitchen_switch_battery_level
+                    name: Kitchen switch
+                    show_state: true
+                    template:
+                      - default
+                  - type: custom:button-card
+                    entity: sensor.hue_outdoor_motion_battery_level
+                    name: Porch motion sensor
+                    show_state: true
+                    template:
+                      - default
+
+              - type: grid
+                columns: 3
+                title: Power usage today
+                cards:
+                  - entity: sensor.living_room_tv_today_kwh
+                    graph: line
+                    hours_to_show: 12
+                    name: TV
+                    type: sensor
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(115, 115, 115, 0.2);
+                          border-radius: 0.8rem;
+                          transition: none 0s ease 0s;
+                          color: rgba(255, 255, 255, 0.3);
+                          overflow: hidden;
+                        }
+                  - entity: sensor.shed_today_kwh
+                    graph: line
+                    hours_to_show: 12
+                    name: Sound system
+                    type: sensor
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(115, 115, 115, 0.2);
+                          border-radius: 0.8rem;
+                          transition: none 0s ease 0s;
+                          color: rgba(255, 255, 255, 0.3);
+                          overflow: hidden;
+                        }
+                  - entity: sensor.freezer_today_kwh
+                    graph: line
+                    hours_to_show: 12
+                    name: Freezer
+                    type: sensor
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(115, 115, 115, 0.2);
+                          border-radius: 0.8rem;
+                          transition: none 0s ease 0s;
+                          color: rgba(255, 255, 255, 0.3);
+                          overflow: hidden;
+                        }
+                
+              - type: grid
+                columns: 2
+                title: TV power now
+                cards:
+                  - entity: sensor.living_room_tv_watts
+                    graph: line
+                    hours_to_show: 12
+                    name: TV
+                    type: sensor
+                    detail: 1
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(115, 115, 115, 0.2);
+                          border-radius: 0.8rem;
+                          transition: none 0s ease 0s;
+                          color: rgba(255, 255, 255, 0.3);
+                          overflow: hidden;
+                        }
+                  - entity: sensor.shed_watts
+                    graph: line
+                    hours_to_show: 12
+                    name: Sound system
+                    type: sensor
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(115, 115, 115, 0.2);
+                          border-radius: 0.8rem;
+                          transition: none 0s ease 0s;
+                          color: rgba(255, 255, 255, 0.3);
+                          overflow: hidden;
+                        }
+                
+            type: vertical-stack
+        type: vertical-stack
+  - title: People
+    theme: tablet
+    path: people
+    background: center / cover no-repeat url("/local/background.png") fixed
+    icon: 'mdi:account'
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: entity
+                entity: person.michael
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background-color: rgba(115, 115, 115, 0.2);
+                      border-radius: 0.8rem;
+                      transition: none 0s ease 0s;
+                      color: rgba(255, 255, 255, 0.3);
+                      overflow: hidden;
+                    }
+              - type: entity
+                entity: person.freya
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background-color: rgba(115, 115, 115, 0.2);
+                      border-radius: 0.8rem;
+                      transition: none 0s ease 0s;
+                      color: rgba(255, 255, 255, 0.3);
+                      overflow: hidden;
+                    }
+          - type: map
+            entities:
+              - entity: zone.home
+              - entity: device_tracker.freya_s_sm_g960f
+                name: Freya
+              - entity: device_tracker.pixel_5
+                name: Michael
+            geo_location_sources:
+              - all
+            dark_mode: false
+            hours_to_show: 0
+  - title: Internet
+    panel: false
+    theme: tablet
+    path: internet
+    background: center / cover no-repeat url("/local/background.png") fixed
+    icon: 'mdi:speedometer'
+    badges: []
+    cards:
+      - cards:
+          - cards:
+              - entity: sensor.speedtest_download
+                hours_to_show: 1
+                name: Download speed
+                type: sensor
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background-color: rgba(115, 115, 115, 0.2);
+                      border-radius: 0.8rem;
+                      transition: none 0s ease 0s;
+                      color: rgba(255, 255, 255, 0.3);
+                      overflow: hidden;
+                    }
+              - entity: sensor.speedtest_upload
+                hours_to_show: 1
+                name: Upload speed
+                type: sensor
+                detail: 1
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background-color: rgba(115, 115, 115, 0.2);
+                      border-radius: 0.8rem;
+                      transition: none 0s ease 0s;
+                      color: rgba(255, 255, 255, 0.3);
+                      overflow: hidden;
+                    }
+            title: Internet
+            type: horizontal-stack
+          - cards:
+              - entity: sensor.qbittorrent_down_speed
+                graph: line
+                hours_to_show: 1
+                name: Download
+                type: sensor
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background-color: rgba(115, 115, 115, 0.2);
+                      border-radius: 0.8rem;
+                      transition: none 0s ease 0s;
+                      color: rgba(255, 255, 255, 0.3);
+                      overflow: hidden;
+                    }
+              - entity: sensor.qbittorrent_up_speed
+                graph: line
+                hours_to_show: 1
+                name: Upload
+                type: sensor
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background-color: rgba(115, 115, 115, 0.2);
+                      border-radius: 0.8rem;
+                      transition: none 0s ease 0s;
+                      color: rgba(255, 255, 255, 0.3);
+                      overflow: hidden;
+                    }
+            title: Qbittorrent
+            type: horizontal-stack
+        type: vertical-stack
+  - title: Travel
+    path: travel
+    theme: tablet
+    background: center / cover no-repeat url("/local/background.png") fixed
+    icon: 'mdi:car-side'
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: conditional
+            conditions:
+              - entity: person.michael
+                state_not: home
+            card:
+              entity: sensor.phone_to_home
+              name: Travel time to home
+              type: sensor
+          - entity: sensor.phone_to_work
+            name: Travel time to work
+            type: sensor
+  - title: test
+    theme: tablet
+    path: test
+    background: center / cover no-repeat url("/local/background.png") fixed
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: button
+            tap_action:
+              action: toggle
+            entity: switch.living_room_tv
+            name: TV
+            show_state: true
+          - type: horizontal-stack
+            cards:
+              - type: light
+                entity: light.loungeroom
+                name: Lounge room lights
+              - type: light
+                entity: light.kitchen_2
+                name: Kitchen lights
+          - type: button
+            tap_action:
+              action: toggle
+            entity: switch.coffee_machine
+            name: Coffee machine
+            show_state: true

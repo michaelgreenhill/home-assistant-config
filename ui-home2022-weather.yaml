@@ -1,0 +1,161 @@
+title: Weather
+icon: mdi:weather-cloudy
+path: weather
+type: custom:grid-layout
+layout:
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+  grid-template-areas: |
+    "header header header header"
+    "climate observations observations forecast"
+  mediaquery:
+    "(max-width: 600px)":
+      grid-template-columns: 100%
+      grid-template-areas: |
+        "header"
+        "observations"
+        "forecast"
+        "climate"
+    "(max-width: 800px)":
+      grid-template-columns: 50% 50%
+      grid-template-areas: |
+        "header header"
+        "observations observations"
+        "climate forecast"
+    "(max-width: 1075px)":
+      grid-template-columns: 33% 33% 33%
+      grid-template-areas: |
+        "header header header"
+        "observations observations observations"
+        "climate forecast forecast"
+  grid-gap: 0px
+  grid-template-rows: auto
+  grid-auto-flow: row
+  grid-column-gap: 10px
+  grid-row-gap: 10px
+  align-items: stretch
+  layout_options:
+cards:
+  - type: thermostat
+    entity: climate.lounge_room_aircon
+    view_layout:
+      #grid-column: auto / span 2
+      #grid-row: auto / span 2
+      grid-area: climate
+    card_mod:
+      style: |
+        ha-card { 
+          transition: none 0s ease 0s;
+        }
+  - type: 'custom:layout-card'
+    layout_type: grid
+    layout_options:
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) 
+      grid-column-gap: 10px
+      grid-row-gap: 10px
+    style: 
+      margin: 0
+      padding: 0
+    view_layout: 
+      grid-area: observations
+    cards:
+      - type: sensor
+        entity: sensor.living_room_temp
+        name: Inside
+        graph: line
+        detail: 1
+        hours_to_show: 12
+        view_layout:
+          #grid-column: auto / span 2
+          #grid-row: auto / span 2
+        card_mod:
+          style: |
+            ha-card { 
+              transition: none 0s ease 0s;
+              overflow: hidden;
+            }
+      - type: sensor
+        entity: sensor.frontdoor_temperature
+        graph: line
+        name: Outside
+        hours_to_show: 12
+        view_layout:
+          #grid-column: auto / span 2
+          #grid-row: auto / span 2
+        card_mod:
+          style: |
+            ha-card { 
+              transition: none 0s ease 0s;
+              overflow: hidden;
+            }
+      - type: sensor
+        entity: sensor.selby_rainfall_daily
+        graph: line
+        name: Rain today
+        hours_to_show: 12
+        view_layout:
+          #grid-column: auto / span 2
+          #grid-row: auto / span 2
+        card_mod:
+          style: |
+            ha-card { 
+              transition: none 0s ease 0s;
+              overflow: hidden;
+            }
+      - type: sensor
+        entity: sensor.backyard_anemometer_average_wind_speed
+        graph: line
+        name: Wind speed
+        hours_to_show: 12
+        view_layout:
+          #grid-column: auto / span 2
+          #grid-row: auto / span 2
+        card_mod:
+          style: |
+            ha-card { 
+              transition: none 0s ease 0s;
+              overflow: hidden;
+            }
+      - type: sensor
+        entity: sensor.backyard_anemometer_max_wind_speed
+        graph: line
+        name: Wind gust
+        hours_to_show: 12
+        view_layout:
+          #grid-column: auto / span 2
+          #grid-row: auto / span 2
+        card_mod:
+          style: |
+            ha-card { 
+              transition: none 0s ease 0s;
+              overflow: hidden;
+            }
+      - type: custom:compass-card
+        indicator_sensors: 
+          - sensor: sensor.backyard_anemometer_wind_direction_corrected
+        value_sensors:
+          - sensor: sensor.backyard_anemometer_average_wind_speed
+        header:
+          title:
+            value: Wind direction
+        view_layout:
+          #grid-column: auto / span 2
+          #grid-row: auto / span 2
+        card_mod:
+          style: |
+            ha-card { 
+              transition: none 0s ease 0s;
+              overflow: hidden;
+            }
+  - type: weather-forecast
+    entity: weather.belgrave
+    secondary_info_attribute: humidity
+    card_mod:
+      style: |
+        ha-card { 
+          transition: none 0s ease 0s;
+          align-self: stretch;
+        }
+    view_layout: 
+      grid-area: forecast
+      #grid-column: auto / span 2
+      #grid-row: auto / span 2

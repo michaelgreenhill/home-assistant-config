@@ -1,0 +1,107 @@
+hue_variables:
+  bright_hex: &bright_hex "#FDCA64"
+  concentrate_hex: &concentrate_hex "#BBEEF3"
+  relax_hex: &relax_hex "#FFE7C0"
+  nightlight_hex: &nightlight_hex
+  sundaymorning_hex: &sundaymorning_hex "#8BCBDD"
+
+light.laundry:
+  title: "Laundry"
+  style:
+    $: |
+      .mdc-dialog .mdc-dialog__container {
+        width: 100%;
+      }
+      .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+        width:100%;
+      }
+    .: |
+      :host {
+        --mdc-theme-surface: rgba(0,0,0,0);
+        --secondary-background-color: rgba(0,0,0,0);
+        --ha-card-background: rgba(0,0,0,0);
+        --mdc-dialog-scrim-color: rgba(0,0,0,0.8);
+        --mdc-dialog-min-height: 100%;
+        --mdc-dialog-min-width: 100%;
+        --mdc-dialog-max-width: 100%;
+      }
+      mwc-icon-button {
+        color: #FFF;
+      }
+  card:
+    type: 'custom:light-popup-card'
+    fullscreen: false
+    name: Laundry
+    entity: light.laundry
+    icon: mdi:lightbulb-group
+    actionsInARow: 2
+    brightnessWidth: 150px
+    brightnessHeight: 400px
+    switchWidth: 150px
+    switchHeight: 400px
+    actions:
+      - action: call-service
+        service: scene.turn_on
+        service_data:
+          entity_id: scene.laundry_bright
+        color: *bright_hex
+        name: Bright
+      - action: call-service 
+        service: scene.turn_on
+        service_data:
+          entity_id: scene.laundry_relax
+        color: *relax_hex
+        name: Relax
+      - action: call-service
+        service: scene.turn_on
+        service_data:
+          entity_id: scene.laundry_concentrate
+        color: *concentrate_hex
+        name: Concentrate
+      - action: call-service
+        service: scene.turn_on
+        service_data:
+          entity_id: scene.laundry_sunday_morning
+        color: *sundaymorning_hex
+        name: Sunday morning
+
+light.hallway:
+  title: "Hallway"
+  card:
+    type: 'custom:light-popup-card'
+    fullscreen: false
+    name: Hallway
+    entity: light.hallway
+    icon: mdi:lightbulb-group
+    actionsInARow: 2
+    brightnessWidth: 150px
+    brightnessHeight: 400px
+    switchWidth: 150px
+    switchHeight: 400px
+    sliderColoredByLight: true
+    displayType: slider
+    actions:
+      - action: call-service
+        service: scene.turn_on
+        service_data:
+          entity_id: scene.hallway_bright
+        color: *bright_hex
+        name: Bright
+      - action: call-service 
+        service: scene.turn_on
+        service_data:
+          entity_id: scene.hallway_relax
+        color: *relax_hex
+        name: Relax
+      - action: call-service
+        service: scene.turn_on
+        service_data:
+          entity_id: scene.hallway_concentrate
+        color: *concentrate_hex
+        name: Concentrate
+      - action: call-service
+        service: scene.turn_on
+        service_data:
+          entity_id: scene.hallway_sunday_morning
+        color: *sundaymorning_hex
+        name: Sunday morning

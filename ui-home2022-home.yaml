@@ -1,0 +1,333 @@
+title: Home
+icon: mdi:home
+path: home
+type: custom:grid-layout
+layout: 
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) 
+  grid-template-areas: |
+    "header header header header"
+    "sidebar lights lights climate"
+    "sidebar weather weather climate"
+    "cameras cameras cameras cameras"
+  mediaquery:
+    "(max-width: 600px)":
+      grid-template-columns: 100%
+      grid-template-areas: |
+        "header"
+        "sidebar"
+        "lights"
+        "weather"
+        "climate"
+        "cameras"
+    "(max-width: 800px)":
+      grid-template-columns: 50% 50%
+      grid-template-areas: |
+        "header header"
+        "sidebar climate"
+        "weather climate"
+        "cameras lights"
+    "(max-width: 1075px)":
+      grid-template-columns: 33% 33% 33%
+      grid-template-areas: |
+        "header header header"
+        "sidebar climate lights"
+        "sidebar climate weather"
+        "cameras cameras lights"
+  grid-gap: 0px
+  grid-template-rows: auto
+  grid-auto-flow: row
+  grid-column-gap: 10px
+  grid-row-gap: 10px
+  align-items: stretch
+cards:
+  - type: markdown
+    content: >
+      ## {% if now().hour < 12 %}Good morning{% elif now().hour < 18 %}Good afternoon{% else %}Good evening{% endif %}. 
+      
+      The temperature is **{{ states('sensor.frontdoor_temperature') }}&deg;** outside and **{{ states('sensor.living_room_temp') }}&deg;** inside. There has been **{{ states('sensor.selby_rainfall_daily') }} mm** rainfall today.
+    view_layout:
+      #grid-column: 1 / -1
+      grid-area: header
+  - type: 'custom:layout-card'
+    layout_type: grid
+    layout_options:
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) 
+      grid-column-gap: 10px
+      grid-row-gap: 10px
+    style: 
+      margin: 0px
+      padding: 0px
+    view_layout: 
+      grid-area: sidebar
+    cards: 
+      - type: conditional
+        conditions: 
+          - entity: sensor.belgrave_fire_danger_0
+            state_not: unknown
+        view_layout:
+          grid-column: auto / span 2
+        card:
+          type: 'custom:button-card'
+          entity: sensor.belgrave_fire_danger_0
+          name: Fire danger today
+          template: gh_fire
+      - type: 'custom:button-card'
+        entity: sensor.belgrave_fire_danger_1
+        name: Fire danger tomorrow
+        template: gh_fire
+        view_layout:
+          grid-column: auto / span 2
+      - type: 'custom:button-card'
+        entity: lock.front_door_lock_8cfff910_door_lock
+        name: Front door lock
+        icon: mdi:lock
+        size: 50px
+        styles:
+          name:
+            - margin-top: 1rem
+        state:
+          - value: "locked"
+            color: green
+            icon: mdi:lock
+            tap_action:
+              action: call-service
+              service: lock.unlock
+              service_data:
+                  entity_id: lock.front_door_lock_8cfff910_door_lock
+          - value: "unlocked"
+            color: red
+            icon: mdi:lock-open-variant
+            tap_action:
+              action: call-service
+              service: lock.lock
+              service_data:
+                entity_id: lock.front_door_lock_8cfff910_door_lock
+      - type: 'custom:button-card'
+        entity: switch.living_room_tv
+        name: 'Movie time'
+        icon: mdi:presentation-play
+        size: 50px
+        tap_action:
+          action: call-service
+          service: script.movie_time
+        styles:
+          name:
+            - margin-top: 1rem
+      - type: weather-forecast
+        entity: weather.belgrave
+        secondary_info_attribute: humidity
+        view_layout:
+          grid-column: auto / span 2
+          grid-row: auto / span 2
+        card_mod:
+          style: |
+            ha-card { 
+              transition: none 0s ease 0s;
+            }
+  - type: 'custom:layout-card'
+    layout_type: grid
+    layout_options:
+      grid-template-columns: 1fr 1fr
+      grid-column-gap: 10px
+      grid-row-gap: 10px
+    style: 
+      margin: 0
+      padding: 0  
+    view_layout: 
+      grid-area: climate
+    cards: 
+      - type: thermostat
+        entity: climate.lounge_room_aircon
+        view_layout:
+          grid-column: auto / span 2
+          grid-row: auto / span 2
+        card_mod:
+          style: |
+            ha-card { 
+              transition: none 0s ease 0s;
+            }
+      - type: sensor
+        entity: sensor.living_room_temp
+        name: Inside
+        graph: line
+        detail: 1
+        hours_to_show: 12
+        card_mod:
+          style: |
+            ha-card { 
+              transition: none 0s ease 0s;
+              overflow: hidden;
+            }
+      - type: sensor
+        entity: sensor.frontdoor_temperature
+        graph: line
+        name: Outside
+        hours_to_show: 12
+        card_mod:
+          style: |
+            ha-card { 
+              transition: none 0s ease 0s;
+              overflow: hidden;
+            }
+  - type: 'custom:layout-card'
+    layout_type: grid
+    layout_options:
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) 
+      grid-column-gap: 10px
+      grid-row-gap: 10px
+    style: 
+      margin: 0
+      padding: 0
+    view_layout: 
+      grid-area: cameras
+    cards: 
+      - type: picture-entity
+        camera_view: live
+        entity: camera.selby_ubnt_g3_01_medium
+        name: "Front yard"
+      - type: picture-entity
+        camera_view: live
+        entity: camera.selby_ubnt_g3_02_medium
+        name: "Driveway"
+      - type: picture-entity
+        camera_view: live
+        entity: camera.selby_ubnt_g3_03_medium
+        name: "Gazebo"
+      - type: picture-entity
+        camera_view: live
+        entity: camera.selby_ubnt_g3_04_medium
+        name: "Back yard"
+      - type: picture-entity
+        camera_view: live
+        entity: camera.living_room
+        name: "Living room"
+  - type: 'custom:layout-card'
+    layout_type: grid
+    layout_options:
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) 
+      grid-column-gap: 10px
+      grid-row-gap: 10px
+    style: 
+      margin: 0
+      padding: 0
+    view_layout: 
+      grid-area: lights
+    cards:
+      - type: 'custom:button-card'
+        entity: light.office_2
+        template: gh_lights
+        hold_action:
+          action: more-info
+      - type: 'custom:button-card'
+        entity: light.living_room_2
+        template: gh_lights
+      - type: 'custom:button-card'
+        entity: light.dining_room
+        template: gh_lights
+      - type: 'custom:button-card'
+        entity: light.kitchen
+        template: gh_lights
+      - type: 'custom:button-card'
+        entity: light.porch_2
+        show_state: false
+        template: gh_lights
+      - type: 'custom:button-card'
+        entity: light.bedroom_2
+        template: gh_lights
+      - type: 'custom:button-card'
+        entity: light.deck_2
+        template: gh_lights
+      - type: 'custom:button-card'
+        entity: light.backyard_2
+        template: gh_lights
+      - type: 'custom:button-card'
+        entity: light.hallway_2
+        template: gh_lights
+      - type: 'custom:button-card'
+        entity: light.laundry_2
+        template: gh_lights
+      - type: 'custom:button-card'
+        entity: light.guest_room_2
+        template: gh_lights
+      - type: 'custom:button-card'
+        entity: switch.shed_floodlight
+        template: gh_lights
+      - type: 'custom:button-card'
+        entity: switch.freezer
+        template: gh_lights
+      - type: 'custom:button-card'
+        entity: switch.fireplace_fan
+        template: gh_lights
+
+
+  - type: 'custom:layout-card'
+    layout_type: grid
+    layout_options:
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) 
+      grid-column-gap: 10px
+      grid-row-gap: 10px
+    style: 
+      margin: 0
+      padding: 0
+    view_layout: 
+      grid-area: weather
+    cards:
+      - type: sensor
+        entity: sensor.selby_rainfall_daily
+        graph: line
+        name: Rain today
+        hours_to_show: 12
+        view_layout:
+          #grid-column: auto / span 2
+          #grid-row: auto / span 2
+        card_mod:
+          style: |
+            ha-card { 
+              transition: none 0s ease 0s;
+              overflow: hidden;
+            }
+      - type: sensor
+        entity: sensor.backyard_anemometer_average_wind_speed
+        graph: line
+        name: Wind speed
+        hours_to_show: 12
+        view_layout:
+          #grid-column: auto / span 2
+          #grid-row: auto / span 2
+        card_mod:
+          style: |
+            ha-card { 
+              transition: none 0s ease 0s;
+              overflow: hidden;
+            }
+      - type: sensor
+        entity: sensor.backyard_anemometer_max_wind_speed
+        graph: line
+        name: Wind gust
+        hours_to_show: 12
+        view_layout:
+          #grid-column: auto / span 2
+          #grid-row: auto / span 2
+        card_mod:
+          style: |
+            ha-card { 
+              transition: none 0s ease 0s;
+              overflow: hidden;
+            }
+      - type: custom:compass-card
+        indicator_sensors: 
+          - sensor: sensor.backyard_anemometer_wind_direction_corrected
+        value_sensors:
+          - sensor: sensor.backyard_anemometer_average_wind_speed
+        header:
+          title:
+            value: Wind direction
+        view_layout:
+          #grid-column: auto / span 2
+          #grid-row: auto / span 2
+        card_mod:
+          style: |
+            ha-card { 
+              transition: none 0s ease 0s;
+              overflow: hidden;
+            }

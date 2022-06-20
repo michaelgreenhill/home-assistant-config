@@ -1,0 +1,53 @@
+title: Areas
+path: areas
+cards:
+  # Back Yard
+  - type: area
+    area: f4cffa04025d425caddc3a4772bd21d5
+  # Bathroom
+  - type: area
+    area: bathroom
+  # Bedroom
+  - type: area
+    area: bedroom
+  # Deck
+  - type: area
+    area: deck
+  # Dining Room
+  - type: area
+    area: dining_room
+  # Front porch
+  - type: area
+    area: front_porch
+  # Front yard
+  - type: area
+    area: e068e0ae02b440bd900b244dd35cfa43
+  # Guest room
+  - type: area
+    area: guest_room
+  # Hallway
+  - type: area
+    area: hallway
+  # Kitchen
+  - type: area
+    area: 62f7ee985b47414fa063e98a584de577
+  # Laundry
+  - type: area
+    area: laundry
+  # living room
+  - type: area
+    area: 2ef4f86188e0472698350e8e6e447ab7
+  # Office
+  - type: area
+    area: 1b54029ef6cb4ca48a560f95180e44ed
+  # Pantry
+  - type: area
+    area: pantry
+  # Shed
+  - type: area
+    area: 841773a32cd1429697960a51063d569a
+  # Workshop
+  - type: area
+    area: workshop
+
+

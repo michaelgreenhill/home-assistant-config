@@ -1,0 +1,73 @@
+title: Lights
+icon: mdi:lightbulb-group
+path: lights
+cards:
+  - type: 'custom:layout-card'
+    layout_type: grid
+    layout_options:
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) 
+      grid-column-gap: 10px
+      grid-row-gap: 10px
+    style: 
+      margin: 0
+      padding: 0
+    view_layout: 
+      grid-area: lights
+    cards:
+      - type: 'custom:button-card'
+        entity: light.laundry
+        template: gh_lights
+        hold_action:
+          action: more-info
+      - type: 'custom:button-card'
+        entity: light.living_room_2
+        template: gh_lights
+        hold_action:
+          action: more-info
+      - type: 'custom:button-card'
+        entity: light.dining_room
+        template: gh_lights
+        hold_action:
+          action: more-info
+      - type: 'custom:button-card'
+        entity: light.kitchen
+        template: gh_lights
+        hold_action:
+          action: more-info
+      - type: 'custom:button-card'
+        entity: light.porch_2
+        template: gh_lights
+        hold_action:
+          action: more-info
+      - type: 'custom:button-card'
+        entity: light.bedroom_2
+        template: gh_lights
+        hold_action:
+          action: more-info
+      - type: 'custom:button-card'
+        entity: light.deck_2
+        template: gh_lights
+        hold_action:
+          action: more-info
+      - type: 'custom:button-card'
+        entity: light.backyard_2
+        template: gh_lights
+        hold_action:
+          action: more-info
+      - type: 'custom:button-card'
+        entity: light.hallway
+        template: gh_lights
+        hold_action:
+          action: more-info
+      - type: 'custom:button-card'
+        entity: light.laundry_2
+        template: gh_lights
+        hold_action:
+          action: more-info
+      - type: 'custom:button-card'
+        entity: light.guest_room_2
+        template: gh_lights
+        hold_action:
+          action: more-info
+
+popup_cards: !include ui-home2022-lights-popups.yaml
