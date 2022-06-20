@@ -1,0 +1,9 @@
+---
+
+# Get the wind direction for my EcoWitt WS68.
+# This attribute is not automatically discovered by Home Assistant.
+
+name: "Backyard Anemometer - Wind direction"
+unique_id: "backyard_anemometer_wind_direction"
+state_topic: "rtl_433/+/devices/EcoWitt-WS68/+/wind_dir_deg"
+unit_of_measurement: "°"

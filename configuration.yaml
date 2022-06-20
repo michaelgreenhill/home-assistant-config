@@ -504,29 +504,7 @@ localtuya:
       #  current: 18 # Optional
       #  current_consumption: 19 # Optional
       #  voltage: 20 # Optional
-
-mqtt:
-  #discovery: true
-  discovery_prefix: homeassistant
-  sensor:
-    - name: "Backyard Anemometer - Average wind speed"
-      unique_id: "backyard_anemometer_average_wind_speed"
-      unit_of_measurement: "km/h"
-      state_topic: "rtl_433/+/devices/EcoWitt-WS68/+/wind_avg_raw"
-    - name: "Backyard Anemometer - Max wind speed"
-      unique_id: "backyard_anemometer_max_wind_speed"
-      unit_of_measurement: "km/h"
-      state_topic: "rtl_433/+/devices/EcoWitt-WS68/+/wind_max_raw"
-    - name: "Backyard Anemometer - Wind direction"
-      unique_id: "backyard_anemometer_wind_direction"
-      state_topic: "rtl_433/+/devices/EcoWitt-WS68/+/wind_dir_deg"
-      unit_of_measurement: "°"
-    - name: "Backyard Anemometer - Lux"
-      unique_id: "backyard_anemometer_lux"
-      state_topic: "rtl_433/+/devices/EcoWitt-WS68/+/lux_raw"
-
-
-      
+    
 
   
 browser_mod:

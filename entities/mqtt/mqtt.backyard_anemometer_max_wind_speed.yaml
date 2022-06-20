@@ -1,0 +1,9 @@
+---
+
+# Get the max wind speed for my EcoWitt WS68.
+# This attribute is not automatically discovered by Home Assistant.
+
+name: "Backyard Anemometer - Max wind speed"
+unique_id: "backyard_anemometer_max_wind_speed"
+unit_of_measurement: "km/h"
+state_topic: "rtl_433/+/devices/EcoWitt-WS68/+/wind_max_raw"
