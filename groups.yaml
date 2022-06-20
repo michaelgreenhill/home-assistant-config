@@ -1,0 +1,83 @@
+NetworkSnmp_card:
+  name: Bandwidth
+  entities:
+    - sensor.ping_time
+    - sensor.wan_traffic_in_mean
+    - sensor.wan_traffic_out_mean
+    - sensor.lan_load_in_mean
+    - sensor.lan_load_out_mean
+
+people:
+  name: mf
+  entities:
+    - person.michael
+    - person.freya
+
+living_room_lights:
+  name: Living Room
+  entities:
+    - light.living_room_2
+    - light.dining_room
+
+lounge_room_lights:
+  name: Lounge Room
+  entities:
+    - light.living_room_2
+    - light.dining_room
+
+front_porch_lights:
+  name: Front Porch
+  entities:
+    - light.front_porch_light_1
+    - light.front_porch_light_2
+    - light.front_porch_uplights
+
+kitchen_lights:
+  name: Kitchen
+  entities:
+    - light.kitchen
+    - light.pantry_2
+
+dining_room_lights:
+  name: Dining Room
+  entities:
+    - light.dining_room_downlight_1
+    - light.dining_room_downlight_2
+    - light.dining_room_downlight_3
+
+deck_lights:
+  name: Deck
+  entities:
+    - light.deck_downlight_1
+    - light.deck_downlight_2
+    - light.deck_sconce_1
+    - light.deck_sconce_2
+    - light.deck_lights
+
+back_yard_lights:
+  name: Back Yard
+  entities:
+    - light.backyard_festoon_lights_1
+    - switch.backyard_festoon_lights_2
+
+office_lights:
+  name: Office
+  entities:
+    - light.office_downlight_1
+    - light.office_downlight_2
+
+hallway_lights:
+  name: Hallway
+  entities:
+    - light.hallway_downlight_1
+
+laundry_lights:
+  name: Laundry
+  entities:
+    - light.laundry_downlight_1
+    - light.laundry_downlight_2
+
+pantry_lights:
+  name: Pantry
+  entities:
+    - light.pantry_lights
