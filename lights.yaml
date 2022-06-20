@@ -1,0 +1,84 @@
+
+- name: Porch
+  platform: group
+  entities:
+    - light.front_porch_light_1
+    - light.front_porch_light_2
+    - light.front_porch_uplights
+
+- name: Living room
+  platform: group
+  entities:
+    - light.living_room_downlight_1
+    - light.living_room_downlight_2
+    - light.living_room_downlight_3
+    - light.living_room_downlight_4
+    - light.living_room_downlight_5
+    - light.living_room_downlight_6
+
+- name: Dining room
+  platform: group
+  entities:
+    - light.dining_room_downlight_1
+    - light.dining_room_downlight_2
+    - light.dining_room_downlight_3
+
+- name: Kitchen
+  platform: group
+  entities:
+    - light.kitchen_downlight_1
+    - light.kitchen_downlight_2
+    - light.kitchen_downlight_3
+    - light.kitchen_downlight_4
+
+- name: Pantry
+  platform: group
+  entities:
+    - light.pantry_lights
+
+- name: Hallway
+  platform: group
+  entities:
+    - light.hallway_downlight_1
+
+- name: Laundry
+  platform: group
+  entities:
+    - light.laundry_downlight_1
+    - light.laundry_downlight_2
+
+- name: Guest room
+  platform: group
+  entities:
+    - light.guest_room_downlight_1
+    - light.guest_room_downlight_2
+
+- name: Bedroom
+  platform: group
+  entities:
+    - light.bedroom_downlight_1
+    - light.bedroom_downlight_2
+    - light.bedroom_downlight_3
+    - light.bedroom_downlight_4
+
+- name: Deck
+  platform: group
+  entities:
+    - light.deck_downlight_1
+    - light.deck_downlight_2
+    - light.deck_lights
+    - light.deck_sconce_1
+    - light.deck_sconce_2
+
+- name: Backyard
+  platform: group
+  entities:
+    - light.backyard_festoon_lights_1
+
+- name: Office
+  platform: group
+  entities:
+    - light.office_downlight_1
+    - light.office_downlight_2
+    - light.hue_play_1
+    - light.hue_play_2
