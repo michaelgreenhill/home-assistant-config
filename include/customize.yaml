@@ -1,0 +1,42 @@
+homeassistant:
+  customize:
+    # Lights
+    light.loungeroom:
+      icon: "mdi:lamps"
+    light.kitchen_2:
+      icon: "mdi:ceiling-light"
+
+    # Switches
+    switch.coffee_machine:
+      icon: "mdi:coffee"
+    switch.living_room_tv:
+      icon: "hass:television"
+
+    # Sensors
+    sensor.phone_to_work:
+      icon: "mdi:briefcase"
+    sensor.phone_to_home:
+      icon: "mdi:home"
+    sensor.qbittorrent_up_speed:
+      icon: "mdi:cloud-upload"
+    sensor.qbittorrent_down_speed:
+      icon: "mdi:cloud-download"
+    sensor.speedtest_download:
+      icon: "mdi:speedometer"
+    sensor.speedtest_upload:
+      icon: "mdi:speedometer"
+    sensor.living_room_tv_watts:
+      icon: "mdi:flash"
+    sensor.shed_watts:
+      icon: "mdi:flash"
+    sensor.living_room_tv_today_kwh:
+      icon: "mdi:flash"
+    sensor.shed_today_kwh:
+      icon: "mdi:flash"
+    sensor.openweathermap_temperature:
+      icon: "mdi:thermometer"
+    sensor.living_room_temp:
+      icon: "mdi:thermometer"
+
+    sensor.hue_outdoor_motion_battery_level:
+      icon: "mdi:battery"
