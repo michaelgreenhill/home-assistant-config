@@ -1,0 +1,12 @@
+ha-card svg {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: var(--ha-card-border-radius);
+}
+
+#dwains_dashboard {
+    font-family: "Comfortaa", "Open Sans", sans-serif !important;
+}
+
+div#root {
+    margin: 10px;
+}
