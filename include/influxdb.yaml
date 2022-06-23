@@ -1,0 +1,23 @@
+---
+
+# Rip out the InfluxDB from configuration.yaml and put it into a discrete config file
+
+influxdb:  
+  host: !secret influxdb_hostname
+  ssl: true
+  port: 443
+  api_version: 2
+  token: !secret influxdb_token
+  organization: !secret influxdb_org
+  bucket: homeassistant
+  max_retries: 3
+  default_measurement: state
+  include: #Include Domain
+    entities:
+      - sensor.frontdoor_temperature
+      - sensor.living_room_temp
+      - sensor.living_room_humidity
+      - sensor.lumi_lumi_sensor_magnet_aq2_device_temperature
+      - sensor.backyard_rainfall_meter_rt
+      - sensor.backyard_anemometer_average_wind_speed
+      - sensor.backyard_anemometer_max_wind_speed

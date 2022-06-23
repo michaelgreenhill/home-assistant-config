@@ -1,0 +1,4 @@
+---
+# Rip out the sensors from configuration.yaml and put them into discrete config files
+
+localtuya: !include_dir_list ../entities/localtuya

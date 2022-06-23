@@ -1,0 +1,17 @@
+---
+
+#
+# Attempt to normalise the wind speed to 5 minute intervals to account for gusty nights
+# @author Michael Greenhill
+# @updated 2022-06-23
+#
+
+platform: statistics
+name: Average wind speed over the last 5 minutes
+unique_id: "avg_wind_speed_5mins"
+entity_id: sensor.backyard_anemometer_average_wind_speed
+state_characteristic: mean
+max_age:
+  minutes: 5
+sampling_size: 50
+precision: 1
