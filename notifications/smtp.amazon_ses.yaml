@@ -1,0 +1,17 @@
+---
+
+# 
+# Amazon SES email notifications
+# @author Michael Greenhill
+# @updated 2022-06-24
+#
+
+platform: smtp
+name: "Amazon SES"
+sender: !secret email_from_address
+recipient: !secret email_to_address
+server: email-smtp.ap-southeast-2.amazonaws.com
+port: 587
+encryption: starttls
+username: !secret amazon_ses_username
+password: !secret amazon_ses_password

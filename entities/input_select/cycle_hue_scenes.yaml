@@ -1,0 +1,22 @@
+---
+
+# 
+# Cycle through Philips hue scenes
+# this is referenced by automations for the Ikea Tradfri 5-way button, to set the living room lights.
+#
+
+name: Cycle Philips Hue Scenes
+options:
+  - Bright
+  - Relax
+  - Nightlight
+  - Energize
+  - Dimmed
+  - Savanna sunset
+  - Concentrate
+  - Tropical twilight
+  - Read
+  - Spring blossom
+  - Arctic aurora
+initial: Read
+icon: mdi:lamps
