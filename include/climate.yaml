@@ -1,0 +1,6 @@
+---
+# 
+# Climate devices - HVAC, air conditioning, heating, etc
+#
+
+climate: !include_dir_list ../entities/climate

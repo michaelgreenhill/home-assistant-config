@@ -1,0 +1,7 @@
+---
+# 
+# Lounge room aircon controller - Sensibo
+#
+
+platform: sensibo
+api_key: !secret sensibo_api_key

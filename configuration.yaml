@@ -22,12 +22,6 @@ homeassistant:
   # Customization file
   #customize: !include customize.yaml
 
-# Show links to resources in log and frontend
-#introduction:
-
-# https://www.home-assistant.io/integrations/my/
-# Required for importing blueprints
-my: 
 
 # https://community.home-assistant.io/t/wunderground-data-uploader/330332
 # Required for wunderground uploader
@@ -123,9 +117,6 @@ frontend:
   extra_module_url: 
     - /hacsfiles/lovelace-card-mod/card-mod.js
 
-# Enables configuration UI
-config:
-
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 http:
   use_x_forwarded_for: true
@@ -149,21 +140,9 @@ discovery:
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
-# Enables support for tracking state changes over time
-history:
-
-# Enables a map showing the location of tracked devices
-map:
-
-# Track the sun
-sun:
-
 # Text to speech
 #tts:
 #  - platform: google
-
-# Cloud
-cloud:
 
 tplink:
   discovery: true
@@ -174,11 +153,6 @@ tplink:
     - host: 192.168.178.104
     - host: 192.168.178.153
 
-mobile_app:
-
-climate:
-  - platform: sensibo
-    api_key: !secret sensibo_api_key
 
 stream:
   ll_hls: true
@@ -199,38 +173,7 @@ zone:
     longitude: !secret selby_longitude
     radius: 100
 
-prometheus:
 
-recorder:
-  auto_purge: true
-  purge_keep_days: 14
-  commit_interval: 5
-  db_url: !secret mariadb_url
-  exclude:
-    domains:
-      - automation
-      - updater
-      - media_player
-      - device_tracker
-    entity_globs:
-      - sensor.weather_*
-    entities:
-      - sun.sun # Don't record sun data
-      - sensor.last_boot # Comes from 'systemmonitor' sensor platform
-      - sensor.date
-    event_types:
-      - call_service # Don't record service calls
-
-logbook:
-  exclude:
-    domains:
-      - media_player
-      - device_tracker
-      - updater
-    entities:
-      - sensor.date
-
-system_health:
 
 browser_mod:
 

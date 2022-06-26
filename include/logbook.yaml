@@ -1,0 +1,13 @@
+---
+#
+# https://www.home-assistant.io/integrations/logbook/
+#
+
+logbook:
+  exclude:
+    domains:
+      - media_player
+      - device_tracker
+      - updater
+    entities:
+      - sensor.date

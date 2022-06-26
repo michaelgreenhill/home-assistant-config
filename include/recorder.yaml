@@ -1,0 +1,26 @@
+---
+# The recorder component is storing details in a database which
+# then are handled by the history component.
+#
+# https://www.home-assistant.io/integrations/recorder/
+#
+
+recorder:
+  auto_purge: true
+  purge_keep_days: 14
+  commit_interval: 5
+  db_url: !secret mariadb_url
+  exclude:
+    domains:
+      - automation
+      - updater
+      - media_player
+      - device_tracker
+    entity_globs:
+      - sensor.weather_*
+    entities:
+      - sun.sun # Don't record sun data
+      - sensor.last_boot # Comes from 'systemmonitor' sensor platform
+      - sensor.date
+    event_types:
+      - call_service # Don't record service calls
