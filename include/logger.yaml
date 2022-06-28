@@ -34,3 +34,7 @@ logger:
       # Surpress to chatty Cast integration
       - "Failed to connect to service ServiceInfo"
       - "Error communicating with socket, resetting connection"
+
+    homeassistant.components.websocket_api.http.connection:
+      # Bulk error log spam during start up
+      - "Client exceeded max pending messages"
