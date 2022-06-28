@@ -16,7 +16,6 @@ trigger:
 
 condition:
   - or:
-    conditions:
     - condition: time
       after: '18:00:00'
       before: 06:00:00
