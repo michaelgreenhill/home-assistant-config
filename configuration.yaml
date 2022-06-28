@@ -117,14 +117,6 @@ frontend:
   extra_module_url: 
     - /hacsfiles/lovelace-card-mod/card-mod.js
 
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-http:
-  use_x_forwarded_for: true
-  trusted_proxies:
-    - 192.168.178.37
-    - 192.168.178.33
-#   base_url: example.duckdns.org:8123
-
 # Checks for available updates
 # Note: This component will send some information about your system to
 # the developers to assist with development of Home Assistant.
