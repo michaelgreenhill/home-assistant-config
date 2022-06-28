@@ -70,4 +70,4 @@ cards:
         hold_action:
           action: more-info
 
-popup_cards: !include ui-home2022-lights-popups.yaml
+popup_cards: !include ui-home2022-lights-popups.yml

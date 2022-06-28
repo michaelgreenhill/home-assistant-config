@@ -1,0 +1,14 @@
+---
+#
+# My shiny new home dashboard
+# As this file has a .yaml extension I can use .yml files for includes without recursively/auto-including them in my magical config
+# @author Michael Greenhill
+# @updated 2022-06-28
+#
+
+mode: yaml
+filename: /config/dashboards/lovelace-home/lovelace-home.yml
+title: Home
+icon: mdi:home
+show_in_sidebar: true
+require_admin: true

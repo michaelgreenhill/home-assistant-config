@@ -1,0 +1,8 @@
+button_card_templates: !include /config/resources/button_card_templates.yaml
+
+title: Home
+views:
+  - !include ui-home2022-home.yml
+  - !include ui-home2022-weather.yml
+  - !include ui-home2022-lights.yml
+  - !include ui-home2022-areas.yml

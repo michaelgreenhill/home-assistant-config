@@ -1,8 +1,0 @@
-button_card_templates: !include button_card_templates.yaml
-
-title: Home
-views:
-  - !include ui-home2022-home.yaml
-  - !include ui-home2022-weather.yaml
-  - !include ui-home2022-lights.yaml
-  - !include ui-home2022-areas.yaml
