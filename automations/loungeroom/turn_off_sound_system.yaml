@@ -1,0 +1,17 @@
+---
+
+id: '1614987092745'
+alias: "Living Room - Sound System - OFF"
+description: "Automatically turns off the sound system when the TV is turned off."
+trigger:
+- platform: state
+  entity_id: switch.living_room_tv
+  from: 'on'
+  to: 'off'
+condition: []
+action:
+- type: turn_off
+  device_id: 855e34d2e92c4228b9f5f6f01dc0e485
+  entity_id: switch.shed
+  domain: switch
+mode: single

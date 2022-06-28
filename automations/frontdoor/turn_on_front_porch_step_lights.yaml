@@ -1,0 +1,19 @@
+---
+
+id: '1641095662786'
+alias: Front porch - Step lights - ON
+description: Turns on the step lights on the front porch when the motion- sensor
+  starts.
+trigger:
+- platform: device
+  type: turned_on
+  device_id: 53feaf5ae4f781dc7525408576d760c8
+  entity_id: light.front_porch_light_1
+  domain: light
+condition: []
+action:
+- type: turn_on
+  device_id: 5d823bf2909ad2bcfb0e7818ff81de9e
+  entity_id: light.front_porch_uplights
+  domain: light
+mode: single

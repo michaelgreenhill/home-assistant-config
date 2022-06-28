@@ -1,0 +1,18 @@
+---
+
+id: '1643775998123'
+alias: Pantry lights - OFF
+description: ''
+trigger:
+- type: not_opened
+  platform: device
+  device_id: c5869592d84c6d3fe3c0daa33889b751
+  entity_id: binary_sensor.lumi_lumi_sensor_magnet_aq2_on_off
+  domain: binary_sensor
+condition: []
+action:
+- service: light.turn_off
+  data: {}
+  target:
+    area_id: pantry
+mode: single

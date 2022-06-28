@@ -1,0 +1,36 @@
+---
+# 
+# Turns on/off the shed light switch via the Ikea Tradfri rocking switch.
+# This physical switch is since long dead so this automation doesn't work. 
+# I'm keeping the automation around until I buy a suitable replacement.
+# @author Michael Greenhill
+# @updated 2022-06-28
+#
+
+id: '1644716482628'
+alias: Shed - IKEA wireless on/off switch
+description: ''
+use_blueprint:
+  path: Xelloss99/zha-ikea-tradfri-on-off-switch.yaml
+  input:
+    remote: 22f7dad4145ec0c2db9b0d48c8696e5a
+    button_on_short:
+    - type: turn_on
+      device_id: 3d82efb363d044ccb300cd8b66e59865
+      entity_id: switch.freezer
+      domain: switch
+    button_off_short:
+    - type: turn_off
+      device_id: 3d82efb363d044ccb300cd8b66e59865
+      entity_id: switch.freezer
+      domain: switch
+    button_on_long:
+    - type: turn_on
+      device_id: eaf5f4f00b4288a7b2add3d4ef45c924
+      entity_id: switch.shed_floodlight
+      domain: switch
+    button_off_long:
+    - type: turn_off
+      device_id: eaf5f4f00b4288a7b2add3d4ef45c924
+      entity_id: switch.shed_floodlight
+      domain: switch

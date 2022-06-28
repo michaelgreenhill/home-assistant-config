@@ -1,0 +1,18 @@
+---
+
+id: '1641279259917'
+alias: Backyard - Festoon lights OFF
+description: Turns off the second set of festoon lights when the first is turned
+  off.
+trigger:
+- platform: device
+  type: turned_off
+  device_id: f793b4c10303183589ce4bd9f9d9f606
+  entity_id: light.backyard_festoon_lights_1
+  domain: light
+condition: []
+action:
+- service: switch.turn_off
+  target:
+    entity_id: switch.backyard_festoon_lights_2
+mode: single

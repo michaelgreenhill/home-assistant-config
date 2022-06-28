@@ -1,0 +1,34 @@
+---
+
+id: '1611368002076'
+alias: "Living Room - Cool on arrival"
+description: "If it's hot inside, turn on the AC when we arrive home."
+
+trigger:
+- platform: state
+  entity_id: group.people
+  from: not_home
+  to: home
+
+condition:
+- condition: numeric_state
+  entity_id: sensor.living_room_temp
+  above: '28'
+
+action:
+- service: climate.set_fan_mode
+  data:
+    fan_mode: auto
+  target:
+    device_id: 0bf6da44f50702f1611f23242aac6d10
+- service: climate.set_temperature
+  data:
+    temperature: 22
+    hvac_mode: cool
+- service: climate.turn_on
+  data: {}
+  target:
+    device_id: 0bf6da44f50702f1611f23242aac6d10
+
+initial_state: 'on'
+mode: single

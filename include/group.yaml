@@ -1,0 +1,7 @@
+---
+# This handles the loading of groups
+#
+# https://www.home-assistant.io/docs/group/
+#
+group: !include ../groups.yaml
+group split: !include_dir_named ../entities/groups

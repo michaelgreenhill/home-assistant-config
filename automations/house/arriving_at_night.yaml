@@ -1,0 +1,38 @@
+---
+#
+# Do things when we arrive home at night
+# @author Michael Greenhill
+# @updated 2022-06-28
+#
+
+id: '1611365161122'
+alias: "Arrive home at night"
+description: "Turns on some lights when we arrive home after dark."
+
+trigger:
+  - platform: state
+    entity_id: group.people
+    to: home
+
+condition:
+  - or:
+    conditions:
+    - condition: time
+      after: '18:00:00'
+      before: 06:00:00
+    - condition: numeric_state
+      entity_id: sensor.backyard_anemometer_lux
+      below: 50
+
+action:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: Kitchen
+      scene_name: Warm
+  - type: turn_on
+    device_id: 301b01bd0fdba99ba4b70824283459bf
+    entity_id: light.front_door
+    domain: light
+
+initial_state: 'on'
+mode: single

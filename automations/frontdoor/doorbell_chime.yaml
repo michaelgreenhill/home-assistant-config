@@ -1,0 +1,21 @@
+---
+
+id: '1615184983830'
+alias: Doorbell chime
+description: ''
+trigger:
+- platform: state
+  entity_id: binary_sensor.front_door_ding
+  to: 'on'
+condition: []
+action:
+- service: media_player.play_media
+  data:
+    media_content_id: https://hassio.selby.michaelgreenhill.net/local/sound/promise-616.mp3
+    media_content_type: audio/mp3
+  target:
+    device_id:
+    - 6758e51a93be1590e503ed5460d022a7
+    - 610b4c1201fbac054c670d2085b4f537
+    - f8f169cb07ff67317268c1d22dd25d5b
+mode: single

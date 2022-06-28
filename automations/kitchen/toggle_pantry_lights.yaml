@@ -1,0 +1,33 @@
+---
+
+id: '1624249913765'
+alias: Pantry - Light Switch - TOGGLE
+description: 'Toggles the living room lights on/off state, scenes, and brightness
+  via an Ikea Tradfri remote. '
+use_blueprint:
+  path: frenck/zha-ikea-five-button-remote-for-lights.yaml
+  input:
+    remote: f71d85e1471099753e1afbfb91174120
+    light:
+      area_id:
+      - pantry
+    force_brightness: true
+    brightness: 80
+    button_left_short:
+    - service: input_select.select_previous
+      target:
+        entity_id: input_select.cycle_hue_scenes
+    button_left_long:
+    - service: hue.hue_activate_scene
+      data:
+        group_name: Pantry
+        scene_name: Bright
+    button_right_long:
+    - service: hue.hue_activate_scene
+      data:
+        group_name: Pantry
+        scene_name: Relax
+    button_right_short:
+    - service: input_select.select_next
+      target:
+        entity_id: input_select.cycle_hue_scenes

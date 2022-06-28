@@ -1,0 +1,11 @@
+---
+
+id: '1643510261190'
+alias: Pantry lights - IKEA on/off switch
+description: ''
+use_blueprint:
+  path: poolcactus/zha-ikea-tradfri-on-off-switch-incl-dimmer.yaml
+  input:
+    remote: 22f7dad4145ec0c2db9b0d48c8696e5a
+    light:
+      area_id: pantry

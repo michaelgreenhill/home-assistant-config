@@ -1,0 +1,19 @@
+---
+
+id: '1641279172086'
+alias: Backyard - Festoon lights ON
+description: 'Turns on the second set of festoon lights when the first is turned
+  on. '
+
+trigger:
+- platform: device
+  type: turned_on
+  device_id: f793b4c10303183589ce4bd9f9d9f606
+  entity_id: light.backyard_festoon_lights_1
+  domain: light
+condition: []
+action:
+- service: switch.turn_on
+  target:
+    entity_id: switch.backyard_festoon_lights_2
+mode: single

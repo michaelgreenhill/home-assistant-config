@@ -1,0 +1,35 @@
+---
+
+id: 'front_porch_lux_motion_off'
+alias: 'Front porch - OFF'
+description: 'Turns off the front porch lights after motion ends and the lux level is below 100.'
+trigger:
+- type: no_motion
+  platform: device
+  device_id: 8a96625513cf9701ec3cfd7da08bda36
+  entity_id: binary_sensor.front_porch_motion_sensor_motion
+  domain: binary_sensor
+condition:
+- type: is_illuminance
+  condition: device
+  device_id: 8a96625513cf9701ec3cfd7da08bda36
+  entity_id: sensor.front_porch_motion_sensor_illuminance
+  domain: sensor
+  below: 100
+action: 
+- type: turn_off
+  device_id: 53feaf5ae4f781dc7525408576d760c8
+  entity_id: light.front_porch_light_1
+  domain: light
+- type: turn_off
+  device_id: f9cc45d2f473af2b300604f4baa56202
+  entity_id: light.front_porch_light_2
+  domain: light
+- type: turn_off
+  device_id: 5d823bf2909ad2bcfb0e7818ff81de9e
+  entity_id: light.front_porch_uplights
+  domain: light
+- type: turn_off
+  device_id: d6b921956b57498c0946463bb7c3071b
+  entity_id: light.porch
+  domain: light

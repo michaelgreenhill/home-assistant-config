@@ -1,0 +1,22 @@
+---
+
+id: 'linen_cupboard_on'
+alias: Linen cupboard lights - ON
+description: 'Turns on the light above the linen cupboard when the door is opened.'
+
+trigger:
+- type: opened
+  platform: device
+  device_id: 2885b681ad2ff4ce852c5f5c719c46b4
+  entity_id: binary_sensor.lumi_lumi_sensor_magnet_aq2_870fed07_on_off
+  domain: binary_sensor
+
+condition: []
+
+action:
+- service: scene.turn_on
+  target:
+    entity_id: scene.hallway_bright
+  metadata: {}
+
+mode: single

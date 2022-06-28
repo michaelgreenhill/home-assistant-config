@@ -1,0 +1,41 @@
+---
+#
+# Uses the occupancy sensor on the Aqara zigbee motion sensors to throw an alarm if occupancy is detected while we are not home.
+# @author Michael Greenhill
+# @updated 2022-06-28
+#
+
+id: '1649999891633'
+alias: Alarm - Indoor occupancy while away
+description: 'Uses the occupancy sensor on the Aqara zigbee motion sensors to throw an alarm if occupancy is detected while we are not home.'
+
+trigger:
+  - type: occupied
+    platform: device
+    device_id: 41622ebcffbf84a3fb68b12e38e010cf
+    entity_id: binary_sensor.lumi_lumi_sensor_motion_7b9b4305_occupancy
+    domain: binary_sensor
+
+condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: group.people
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 0
+      state: home
+
+action:
+  - service: notify.amazon_ses
+    data:
+      message: ALARM - Indoor occupancy detected
+      title: ALARM - Indoor occupancy detected
+      target: doctorjbeam@gmail.com
+  - service: notify.mobile_app_pixel_5
+    data:
+      message: ALARM - Indoor occupancy detected
+      title: ALARM - Indoor occupancy detected
+
+mode: single

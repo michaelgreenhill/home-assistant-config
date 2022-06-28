@@ -1,0 +1,34 @@
+---
+# 
+# Upload environmental sensor data to Wunderground.com
+# Based on the template from https://community.home-assistant.io/t/wunderground-data-uploader/330332
+# @updated 2022-06-28
+#
+
+id: wunderground_data_upload
+alias: WUnderground data upload
+use_blueprint:
+  path: dvandonkelaar/wunderground_upload.yaml
+  input:
+    station_id: !secret wunderground_station_id
+    station_key: !secret wunderground_station_key
+    #sensor_baro: 'sensor.outdoor_pressure'
+    sensor_temp: 'sensor.frontdoor_temperature'
+    sensor_humidity: 'sensor.frontdoor_humidity'
+    #sensor_rain: >-
+    #  {{ states('sensor.backyard_rainfall_meter_rt') | float - states('sensor.selby_rainfall_1_hour_ago_2') | float }}
+    sensor_dailyrain: 'sensor.selby_rainfall_daily'
+    sensor_winddir: 'sensor.backyard_anemometer_wind_direction_corrected'
+    sensor_windspeed: 'sensor.backyard_anemometer_average_wind_speed'
+    sensor_windgust: 'sensor.backyard_anemometer_max_wind_speed'
+    refresh_frequency: 60
+    trigger_entities:
+      - sensor.frontdoor_temperature
+      - sensor.frontdoor_humidity
+      - sensor.backyard_rainfall_meter_rt
+      - sensor.selby_rainfall_daily
+      - sensor.backyard_anemometer_wind_direction_corrected
+      - sensor.backyard_anemometer_average_wind_speed
+      - sensor.backyard_anemometer_max_wind_speed
+      - sensor.selby_rainfall_1_hour_ago_2
+    curl_command_service: shell_command.curl_get

@@ -1,0 +1,15 @@
+---
+
+id: '1641278974877'
+alias: Front porch - Lock deadbolt at night
+description: Locks the front door deadbolt at 11 p.m.
+trigger:
+- platform: time
+  at: '23:00:00'
+condition: []
+action:
+- device_id: 7e4bb806c485d30f69129236ba75303a
+  domain: lock
+  entity_id: lock.front_door_lock_8cfff910_door_lock
+  type: lock
+mode: single

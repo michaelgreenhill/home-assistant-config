@@ -1,0 +1,19 @@
+---
+
+id: '1643775945998'
+alias: Pantry Lights - ON
+description: ''
+trigger:
+- type: opened
+  platform: device
+  device_id: c5869592d84c6d3fe3c0daa33889b751
+  entity_id: binary_sensor.lumi_lumi_sensor_magnet_aq2_on_off
+  domain: binary_sensor
+condition: []
+action:
+- service: light.turn_on
+  data:
+    brightness_pct: 100
+  target:
+    area_id: pantry
+mode: single

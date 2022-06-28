@@ -1,0 +1,22 @@
+---
+
+id: 'linen_cupboard_off'
+alias: Linen cupboard lights - OFF
+description: 'Turns off the light above the linen cupboard when the door is closed.'
+
+trigger:
+- type: not_opened
+  platform: device
+  device_id: 2885b681ad2ff4ce852c5f5c719c46b4
+  entity_id: binary_sensor.lumi_lumi_sensor_magnet_aq2_870fed07_on_off
+  domain: binary_sensor
+
+condition: []
+
+action:
+- service: light.turn_off
+  data: {}
+  target:
+    area_id: hallway
+
+mode: single

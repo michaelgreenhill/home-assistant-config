@@ -1,0 +1,33 @@
+---
+
+id: '1649765142678'
+alias: Living Room - Heat on arrival
+description: If it's cold inside, turn on the AC when we arrive home.
+
+trigger:
+  - platform: state
+    entity_id: group.people
+    to: home
+
+condition:
+  - condition: numeric_state
+    entity_id: sensor.living_room_temp
+    below: '16'
+#  - condition: numeric_state
+#    entity_id: sensor.front_porch_motion_sensor_temperature
+#    below: '16'
+
+action:
+  - service: climate.set_temperature
+    data:
+      hvac_mode: heat
+      temperature: 18
+    target:
+      device_id: 0bf6da44f50702f1611f23242aac6d10
+  - service: climate.turn_on
+    data: {}
+    target:
+      device_id: 0bf6da44f50702f1611f23242aac6d10
+
+mode: single
+initial_state: 'on'

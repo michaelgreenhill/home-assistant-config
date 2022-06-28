@@ -1,0 +1,49 @@
+---
+
+id: '1649763439408'
+alias: Turn on the heater in the morning
+description: 'Turns on the heater in the morning when the inside temperature is below 16 degrees'
+trigger:
+- platform: time
+  at: 05:00:00
+condition:
+- condition: numeric_state
+  entity_id: climate.lounge_room_aircon
+  attribute: current_temperature
+  below: '16'
+- condition: or
+  conditions:
+  - condition: device
+    device_id: 1c857eed5cb18f5a930c4bdc4db4c097
+    domain: device_tracker
+    entity_id: device_tracker.pixel_5
+    type: is_home
+  - condition: device
+    device_id: d35d5f8712956e48439978c4719a024a
+    domain: device_tracker
+    entity_id: device_tracker.freya_s_sm_g960f
+    type: is_home
+  - condition: zone
+    entity_id: person.michael
+    zone: zone.home
+- condition: time
+  before: 06:00:00
+  after: 04:00:00
+  weekday:
+  - mon
+  - tue
+  - wed
+  - thu
+  - fri
+action:
+- service: climate.set_temperature
+  data:
+    hvac_mode: heat
+    temperature: 18
+  target:
+    device_id: 0bf6da44f50702f1611f23242aac6d10
+- service: climate.turn_on
+  data: {}
+  target:
+    device_id: 0bf6da44f50702f1611f23242aac6d10
+mode: single

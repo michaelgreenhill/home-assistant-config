@@ -1,0 +1,15 @@
+---
+
+id: '1624268430987'
+alias: Pantry - Light Switch - Scene Cycler
+description: Cycles through Philips Hue scenes when triggered via Living Room -
+  Light Switch
+trigger:
+- platform: state
+  entity_id: input_select.cycle_hue_scenes
+action:
+- service: hue.hue_activate_scene
+  data:
+    group_name: Pantry
+    scene_name: '{{ states(''input_select.cycle_hue_scenes'') }}'
+mode: single

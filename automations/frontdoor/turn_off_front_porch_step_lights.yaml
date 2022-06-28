@@ -1,0 +1,19 @@
+---
+
+id: '1641095818893'
+alias: Front porch - Step lights - OFF
+description: Turns off the step lights on the front porch when the motion sensor
+  ends.
+trigger:
+- platform: device
+  type: turned_off
+  device_id: 53feaf5ae4f781dc7525408576d760c8
+  entity_id: light.front_porch_light_1
+  domain: light
+condition: []
+action:
+- type: turn_off
+  device_id: 5d823bf2909ad2bcfb0e7818ff81de9e
+  entity_id: light.front_porch_uplights
+  domain: light
+mode: single
