@@ -18,6 +18,8 @@ homeassistant:
         192.168.178.109: !secret trusted_user_hash # michael
       allow_bypass_login: true
     - type: homeassistant
+  allowlist_external_dirs:
+    - /media/security
 
   # Customization file
   #customize: !include customize.yaml

@@ -1,0 +1,11 @@
+---
+# The Input text helper integration allows you to define text values
+# that can be controlled via the user interface and can be used within
+# conditions of automation.
+#
+# In the UI these can be found as "Helpers". The input text would be known
+# as the Toggle helper.
+#
+# https://www.home-assistant.io/integrations/input_text/
+#
+input_text: !include_dir_named ../entities/input_text

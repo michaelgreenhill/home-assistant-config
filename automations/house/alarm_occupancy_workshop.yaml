@@ -28,14 +28,87 @@ condition:
       state: home
 
 action:
-  - service: notify.amazon_ses
+
+  # Set the timestamp as a variable and use it later on in the script. This accounts for time spent in-script. 
+  - service: input_text.set_value
+    target:
+      entity_id: input_text.eufy_workshop_camera_timestamp
     data:
-      message: ALARM - Indoor occupancy detected
-      title: ALARM - Indoor occupancy detected
-      target: doctorjbeam@gmail.com
+      value: '{{ now().strftime("%Y%m%d-%H%M%S") }}'
+
+  # Send the notification to Michael's phone  
   - service: notify.mobile_app_pixel_5
     data:
-      message: ALARM - Indoor occupancy detected
-      title: ALARM - Indoor occupancy detected
+      message: ALARM - Workshop occupancy detected
+      title: ALARM - Workshop occupancy detected
+
+  # Take a snapshot referencing the timestamp variable above
+  - service: camera.snapshot
+    target:
+      entity_id: camera.eufy_workshop_camera
+    data: 
+      filename: '/media/security/homeassistant/eufy_workshop_camera_{{ states("input_text.eufy_workshop_camera_timestamp") }}.jpg'
+
+  # Send a HTML-formatted email with the snapshot
+  - service: notify.amazon_ses
+    data:
+      message: ALARM - Workshop occupancy detected
+      title: ALARM - Workshop occupancy detected
+      target: doctorjbeam@gmail.com
+      data:
+        images: 
+          - '/media/security/homeassistant/eufy_workshop_camera_{{ states.input_text.eufy_workshop_camera_timestamp.state }}.jpg'
+        html: >
+            <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+            <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Intruder alert</title>
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css">
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+                    <style type="text/css">
+                        @font-face {
+                          font-family: 'Open Sans';
+                          font-style: normal;
+                          font-weight: 300;
+                          src: local('Open Sans Light'), local('OpenSans-Light'), url(http://fonts.gstatic.com/s/opensans/v13/DXI1ORHCpsQm3Vp6mXoaTZS3E-kSBmtLoNJPDtbj2Pk.ttf) format('truetype');
+                        }
+                        h1,h2,h3,h4,h5,h6 {
+                            font-family:'Open Sans',Arial,sans-serif;
+                            font-weight:400;
+                            margin:10px 0
+                        }
+                    </style>
+                </head>
+                <body>
+                  <div class="jumbotron jumbotron-fluid" style="background-color: #f00a2d; color: white;">
+                      <div class="container py-0">
+                          <h1>ALARM - Workshop occupancy detected</h1>
+                      </div>
+                  </div>
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-xs-12 col-md-6 px-0">
+                        <img class="rounded" style="width: 100%;"
+                            alt="snapshot" src="cid:eufy_workshop_camera_{{ states.input_text.eufy_workshop_camera_timestamp.state }}.jpg" />
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                </body>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
+            </html>
+
+  # Start recording, referencing the timestamp variable above
+  - service: camera.record
+    target:
+      entity_id: camera.eufy_workshop_camera
+    data:
+      duration: 60
+      lookback: 10
+      filename: '/media/security/homeassistant/eufy_workshop_camera_{{ states("input_text.eufy_workshop_camera_timestamp") }}.mp4'
 
 mode: single

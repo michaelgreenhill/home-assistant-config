@@ -1,0 +1,9 @@
+---
+# Input text: Eufy workshop camera timestamp
+#
+# This is an automation value, used to normalise the timestamp of a snapshot/recording throughout the upload+email process. 
+#
+name: "Eufy workshop camera timestamp"
+icon: "mdi:timer-cog"
+initial: "{{ now().strftime('%Y%m%d-%H%M%S') }}"
+mode: "text"

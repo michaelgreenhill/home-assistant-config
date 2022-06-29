@@ -1,0 +1,12 @@
+---
+#
+# Watch specified folders for changes
+# Used by the S3 HACS integration to upload security footage to S3
+# https://www.home-assistant.io/integrations/folder_watcher/
+# 
+
+folder_watcher:
+  - folder: /media/security/homeassistant
+    patterns: 
+      - '*.mp4'
+      - '*.jpg'

@@ -1,0 +1,24 @@
+---
+#
+# When a new snapshot or recording is added to the security watch folder, upload it to S3
+# @author Michael Greenhill
+# @updated 2022-06-28
+#
+
+id: 'bdbb7acc-e714-4f8f-aca9-f95486bd0f28'
+alias: upload-security-footage-to-S3
+description: "When a new snapshot or recording is added to the security watch folder, upload it to S3"
+
+trigger:
+  - platform: event
+    event_type: folder_watcher
+    event_data:
+      event_type: created
+
+action:
+  - service: s3.put
+    data_template:
+      bucket: "mg-security-videos"
+      key: "{{ now().year }}/{{ (now().month | string).zfill(2) }}/{{ (now().day | string).zfill(2) }}/{{ trigger.event.data.file }}"
+      file_path: "{{ trigger.event.data.path }}"
+      storage_class: "STANDARD_IA"

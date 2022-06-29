@@ -1,0 +1,11 @@
+---
+#
+# Configuration for the S3 integration from https://github.com/robmarkcole/HASS-S3
+# Used to upload security camera footage to S3
+# @author Michael Greenhill
+# @updated 2022-06-28
+#
+s3:
+  aws_access_key_id: !secret aws_access_key_id
+  aws_secret_access_key: !secret aws_secret_access_key
+  region_name: ap-southeast-2 # optional region, default is us-east-1
