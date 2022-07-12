@@ -1,0 +1,20 @@
+---
+#
+# Sends a request to healthchecks.io every hour, which will alert me if Home Assistant goes down (silent failure)
+# @author Michael Greenhill
+# @updated 2022-07-12
+#
+
+id: "58d8c14a-77ae-44b0-b20e-a3e3c0a7daa8"
+alias: "System Healthcheck"
+description: "Pings healthchecks.io once every hour. If a ping is not received, healthchecks.io considers this a silent failure and will thorw an error."
+
+trigger:
+  - platform: time_pattern
+    hours: "*"
+    minutes: "5"
+
+action:
+  - service: shell_command.curl_get
+    data: 
+      url: !secret system_healthcheck_url
