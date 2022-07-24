@@ -3,6 +3,7 @@
 #
 # This config allows for HomeAssistant to poll an Inkbird iBBQ-4T over an IP address. 
 # Reserve the IP address in DHCP. 
+# This YAML file is valid for the LocalTuya HACS extension up to < 4.0.0 - from v4 onwards, the YAML config method is deprecated and config is moved to the UI. 
 # 
 
 host: "192.168.178.111"
@@ -10,7 +11,7 @@ device_id: !secret inkbird_ibbq4t_device_id
 local_key: !secret inkbird_ibbq4t_local_key
 friendly_name: "Inkbird iBBQ-4T"
 protocol_version: "3.3"
-scan_interval: 20 # optional, only needed if energy monitoring values are not updating
+scan_interval: 10 # optional, only needed if energy monitoring values are not updating
   #seconds: 20 # Values less than 10 seconds may cause stability issues
 entities:
   - platform: binary_sensor
@@ -19,44 +20,52 @@ entities:
     device_class: power
     state_on: "true" # Optional
     state_off: "false" # Optional
+
   - platform: sensor
-    friendly_name: Battery percentage
+    friendly_name: iBBQ-4T Battery percentage
     id: 101
     unit_of_measurement: "%"
+
   - platform: binary_sensor
     friendly_name: Alert state
     id: 105
     state_on: "true" # Optional
     state_off: "false" # Optional
+
   - platform: sensor
-    friendly_name: Preset temperature
-    id: 106
-    unit_of_measurement: "°F"
-  - platform: sensor
-    friendly_name: Preset temperature
+    friendly_name: iBBQ-4T Preset temperature
     id: 106
     scaling: 0.01
     unit_of_measurement: "°F"
+
   - platform: sensor
-    friendly_name: Probe 1 temperature
+    friendly_name: iBBQ-4T Probe 1 temperature
     id: 107
     unit_of_measurement: "°F"
     scaling: 0.01
+
   - platform: sensor
-    friendly_name: Probe 2 temperature
+    friendly_name: iBBQ-4T Probe 2 temperature
     id: 108
     unit_of_measurement: "°F"
     scaling: 0.01
+
   - platform: sensor
-    friendly_name: Probe 3 temperature
+    friendly_name: iBBQ-4T Probe 3 temperature
     id: 109
     unit_of_measurement: "°F"
     scaling: 0.01
+
   - platform: sensor
-    friendly_name: Probe 4 temperature
+    friendly_name: iBBQ-4T Probe 4 temperature
     id: 110
     unit_of_measurement: "°F"
     scaling: 0.01
+
   - platform: sensor
-    friendly_name: Temperature unit
+    friendly_name: iBBQ-4T Temperature unit
     id: 19
+
+  - platform: sensor
+    friendly_name: iBBQ-4T Probe 1 Settings
+    id: 112

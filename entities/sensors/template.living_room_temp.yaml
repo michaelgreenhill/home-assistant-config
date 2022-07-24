@@ -3,6 +3,6 @@
 platform: template
 sensors:
   living_room_temp:
-    friendly_name_template: '{{ states.climate.lounge_room_aircon.attributes["friendly name"] }} Current Temperature'
+    friendly_name_template: '{{ states.climate.lounge_room_aircon.attributes["friendly_name"] }} Current Temperature'
     value_template: '{{ states.climate.lounge_room_aircon.attributes["current_temperature"] | float }}'
     unit_of_measurement: "C"

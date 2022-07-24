@@ -6,3 +6,4 @@ views:
   - !include ui-home2022-weather.yml
   - !include ui-home2022-lights.yml
   - !include ui-home2022-areas.yml
+  - !include ui-home2022-bbq.yml

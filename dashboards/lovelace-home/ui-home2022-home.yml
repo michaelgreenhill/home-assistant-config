@@ -71,10 +71,15 @@ cards:
           entity: sensor.belgrave_fire_danger_0
           name: Fire danger today
           template: gh_fire
-      - type: 'custom:button-card'
-        entity: sensor.belgrave_fire_danger_1
-        name: Fire danger tomorrow
-        template: gh_fire
+      - type: conditional
+        conditions:
+          - entity: sensor.belgrave_fire_danger_1
+            state_not: unknown
+        card: 
+          type: 'custom:button-card'
+          entity: sensor.belgrave_fire_danger_1
+          name: Fire danger tomorrow
+          template: gh_fire
         view_layout:
           grid-column: auto / span 2
       - type: 'custom:button-card'
@@ -199,8 +204,8 @@ cards:
         name: "Back yard"
       - type: picture-entity
         camera_view: live
-        entity: camera.living_room
-        name: "Living room"
+        entity: camera.eufy_workshop_camera
+        name: "Workshop"
   - type: 'custom:layout-card'
     layout_type: grid
     layout_options:
@@ -257,6 +262,9 @@ cards:
         template: gh_lights
       - type: 'custom:button-card'
         entity: switch.fireplace_fan
+        template: gh_lights
+      - type: 'custom:button-card'
+        entity: switch.workshop_lights
         template: gh_lights
 
 

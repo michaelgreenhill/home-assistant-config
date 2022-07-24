@@ -38,3 +38,36 @@ logger:
     homeassistant.components.websocket_api.http.connection:
       # Bulk error log spam during start up
       - "Client exceeded max pending messages"
+    
+    custom_components.localtuya.common: 
+      # ignore the iBBQ-4T connection while it's down
+      - "Connect to 192.168.178.111 failed"
+    
+    homeassistant.components.binary_sensor: 
+      # Ignore sensibo warnings
+      - "Platform sensibo does not generate unique IDs."
+
+    homeassistant.components.button: 
+      # Ignore sensibo warnings
+      - "Platform sensibo does not generate unique IDs."
+      
+    homeassistant.components.climate: 
+      # Ignore sensibo warnings
+      - "Platform sensibo does not generate unique IDs."
+      
+    homeassistant.components.select: 
+      # Ignore sensibo warnings
+      - "Platform sensibo does not generate unique IDs."
+      
+    homeassistant.components.sensor: 
+      # Ignore sensibo warnings
+      - "Platform sensibo does not generate unique IDs."
+      
+    homeassistant.components.switch: 
+      # Ignore sensibo warnings
+      - "Platform sensibo does not generate unique IDs."
+      
+    homeassistant.components.update: 
+      # Ignore sensibo warnings
+      - "Platform sensibo does not generate unique IDs."
+      
