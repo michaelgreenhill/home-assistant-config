@@ -10,7 +10,7 @@ alias: Workshop - Turn off the lights with motion
 description: 'Turns off the workshop lights after motion ends'
 
 trigger:
-- type: motion
+- type: no_motion
   platform: device
   device_id: 2a9a65b91131d7ec0087ea2570483c01
   entity_id: binary_sensor.lumi_lumi_sensor_motion_dbcc2205_ias_zone

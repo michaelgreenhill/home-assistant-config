@@ -2,7 +2,7 @@
 #
 # Do things when we arrive home at night
 # @author Michael Greenhill
-# @updated 2022-06-28
+# @updated 2022-07-06
 #
 
 id: '1611365161122'
@@ -27,7 +27,11 @@ action:
   - service: hue.hue_activate_scene
     data:
       group_name: Kitchen
-      scene_name: Warm
+      scene_name: Bright
+  - service: hue.hue_activate_scene
+    data:
+      group_name: Living Room
+      scene_name: Bright
   - type: turn_on
     device_id: 301b01bd0fdba99ba4b70824283459bf
     entity_id: light.front_door

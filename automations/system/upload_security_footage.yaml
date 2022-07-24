@@ -6,7 +6,7 @@
 #
 
 id: 'bdbb7acc-e714-4f8f-aca9-f95486bd0f28'
-alias: upload-security-footage-to-S3
+alias: Upload security footage to S3
 description: "When a new snapshot or recording is added to the security watch folder, upload it to S3"
 
 trigger:

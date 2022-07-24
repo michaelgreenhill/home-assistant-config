@@ -1,0 +1,18 @@
+---
+#
+# Send an alert over email (SMTP) when battery level of below 20% is detected.
+# @author Michael Greenhill
+# @updated 2022-07-12
+#
+
+id: '7a475701-ac60-4c6e-9236-6bc4973211bf'
+alias: 'Low battery level detection & notification for all battery sensors'
+description: 'Sends an alert when the battery level of below 20% is detected for any battery-reporting devices. '
+
+use_blueprint:
+  path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
+  input:
+    actions:
+      - service: notify.amazon_ses
+        data:
+          message: 'Battery level is below 20% for the following devices: {{sensors}}'

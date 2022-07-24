@@ -111,4 +111,15 @@ action:
       lookback: 10
       filename: '/media/security/homeassistant/eufy_workshop_camera_{{ states("input_text.eufy_workshop_camera_timestamp") }}.mp4'
 
+  # Delay
+  - delay: 00:01:01
+  
+  # Upload to S3 - this SHOULD work via the Folder Watcher module but it bloody isn't...
+  - service: s3.put
+    data_template:
+      bucket: "mg-security-videos"
+      key: "{{ now().year }}/{{ (now().month | string).zfill(2) }}/{{ (now().day | string).zfill(2) }}/eufy_workshop_camera_{{ states('input_text.eufy_workshop_camera_timestamp') }}.mp4"
+      file_path: '/media/security/homeassistant/eufy_workshop_camera_{{ states("input_text.eufy_workshop_camera_timestamp") }}.mp4'
+      storage_class: "STANDARD_IA"
+
 mode: single

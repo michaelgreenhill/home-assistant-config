@@ -1,0 +1,61 @@
+---
+#
+# Send an alert over email (SMTP) when battery level of below 20% is detected.
+# @author Michael Greenhill
+# @updated 2022-07-12
+#
+
+id: '7a475701-ac60-4c6e-9236-6bc4973211bf'
+alias: 'Low battery level detection & notification for all battery sensors'
+description: 'Sends an alert when the battery level of below 20% is detected for any battery-reporting devices. '
+
+use_blueprint:
+  path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
+  input:
+    actions:
+      - service: notify.amazon_ses
+        data:
+          message: 'Battery level is below 20% for the following devices: {{sensors}}'
+          html: >
+              <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+              <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Low battery level detected</title>
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css">
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+                    <style type="text/css">
+                        @font-face {
+                          font-family: 'Open Sans';
+                          font-style: normal;
+                          font-weight: 300;
+                          src: local('Open Sans Light'), local('OpenSans-Light'), url(http://fonts.gstatic.com/s/opensans/v13/DXI1ORHCpsQm3Vp6mXoaTZS3E-kSBmtLoNJPDtbj2Pk.ttf) format('truetype');
+                        }
+                        h1,h2,h3,h4,h5,h6 {
+                            font-family:'Open Sans',Arial,sans-serif;
+                            font-weight:400;
+                            margin:10px 0
+                        }
+                    </style>
+                </head>
+                <body>
+                  <div class="jumbotron jumbotron-fluid" style="background-color: #f00a2d; color: white;">
+                      <div class="container py-0">
+                          <h1>Low battery alert</h1>
+                      </div>
+                  </div>
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-xs-12 col-md-6 px-0">
+                        <p>Low battery level level has been detected for the following device(s):</p>
+                        <p>{{sensors}}</p>
+                    </div>
+                  </div>
+                  <br>
+                </div>
+              </body>
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+              <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
+            </html>
