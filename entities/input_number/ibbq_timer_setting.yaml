@@ -1,0 +1,9 @@
+---
+#
+#
+#
+
+name: Sets the timer for the iBBQ smoker
+initial: 80
+min: 0
+max: 3600

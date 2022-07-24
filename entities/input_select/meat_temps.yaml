@@ -1,0 +1,15 @@
+---
+# 
+# BBQ meat temp "done"-ness - used to set the temperature range
+# from https://community.home-assistant.io/t/cannot-get-tuya-integration-to-work/226356/41
+# 
+
+name: Doneness
+options:
+  - Rare
+  - Medium-Rare
+  - Medium
+  - Medium-Well
+  - Well
+initial: Rare
+icon: mdi:fire

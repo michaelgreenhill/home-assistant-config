@@ -1,0 +1,23 @@
+---
+#
+# 
+# from https://community.home-assistant.io/t/cannot-get-tuya-integration-to-work/226356/41
+#
+
+id: '11529878-ea06-47d8-a829-34090a902746'
+alias: Set iBBQ Target Temps
+description: ''
+trigger:
+- platform: state
+  entity_id: input_number.ibbq_target_probe_all
+condition: []
+action:
+- service: input_number.set_value
+  data_template:
+    entity_id:
+    - input_number.ibbq_target_probe_1
+    - input_number.ibbq_target_probe_2
+    - input_number.ibbq_target_probe_3
+    - input_number.ibbq_target_probe_4
+    value: '{{ states.input_number.ibbq_target_probe_all.state | int }}'
+mode: single

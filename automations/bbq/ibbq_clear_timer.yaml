@@ -1,0 +1,18 @@
+---
+#
+# https://community.home-assistant.io/t/cannot-get-tuya-integration-to-work/226356/41
+#
+
+id: '4605ae88-7c04-4e93-8ebd-1bf6b8dee27a'
+alias: Cancel iBBQ Timer
+description: ''
+trigger:
+- platform: state
+  entity_id: input_boolean.ibbqtimeswitch
+  to: 'off'
+condition: []
+action:
+- service: timer.cancel
+  target:
+    entity_id: timer.ibbq_timer
+mode: single

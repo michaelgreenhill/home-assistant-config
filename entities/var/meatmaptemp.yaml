@@ -1,0 +1,62 @@
+---
+#
+# Map meat and target temperature "doneness" to an actual temperature value
+# https://community.home-assistant.io/t/inkbird-bbq4t-local-control/309433/22
+# https://github.com/snarky-snark/home-assistant-variables
+#
+
+friendly_name: "Target meat temperature"
+icon: mdi:thermometer
+unit_of_measurement: "°C"
+tracked_entity_id:
+  - input_select.meat_type
+  - input_select.meat_temps
+
+value_template: >
+    {% set tartemp = {
+      "Chicken": {
+          "Rare": 65,
+          "Medium-Rare": 65,
+          "Medium": 68,
+          "Medium-Well": 71,
+          "Well": 74
+      },
+      "Pork": {
+          "Rare": 140,
+          "Medium-Rare": 63,
+          "Medium": 71,
+          "Medium-Well": 74,
+          "Well": 77
+      },
+      "Lamb": {
+          "Rare": 140,
+          "Medium-Rare": 63,
+          "Medium": 71,
+          "Medium-Well": 74,
+          "Well": 77
+      },
+      "Beef": {
+          "Rare": 49,
+          "Medium-Rare": 55,
+          "Medium": 57,
+          "Medium-Well": 63,
+          "Well": 68
+      },
+      "Venison": {
+          "Rare": 49,
+          "Medium-Rare": 55,
+          "Medium": 57,
+          "Medium-Well": 63,
+          "Well": 68
+      },
+      "Brisket": {
+          "Rare": 90,
+          "Medium-Rare": 92,
+          "Medium": 95,
+          "Medium-Well": 97,
+          "Well": 100
+      }
+    } %}
+    {% set meattype = states.input_select.meat_types.state %}
+    {% set meattemp = states.input_select.meat_temps.state %}
+    {{ tartemp[meattype][meattemp] | int }}

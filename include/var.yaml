@@ -1,0 +1,6 @@
+---
+#
+# https://github.com/snarky-snark/home-assistant-variables
+#
+
+var: !include_dir_named ../entities/var

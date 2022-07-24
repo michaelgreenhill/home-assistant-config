@@ -1,0 +1,31 @@
+---
+#
+# 
+# from https://community.home-assistant.io/t/cannot-get-tuya-integration-to-work/226356/41
+#
+
+id: '3c50fdaa-1e37-44da-ad31-d1242b7519d6'
+alias: iBBQ Meat and Temp
+description: ''
+
+trigger:
+  - platform: state
+    entity_id: input_select.meat_types
+  - platform: state
+    entity_id: input_select.meat_temps
+
+condition: []
+
+action:
+  - service: var.set
+    data:
+      entity_id: var.meatmaptemp
+  - service: input_number.set_value
+    target:
+      entity_id:
+      - input_number.ibbq_target_probe_1
+      - input_number.ibbq_target_probe_2
+      - input_number.ibbq_target_probe_3
+      - input_number.ibbq_target_probe_4
+    data:
+      value: '{{states.var.meatmaptemp.state}}'

@@ -1,0 +1,16 @@
+---
+# 
+# BBQ meat types - used to set the temperature range
+# from https://community.home-assistant.io/t/cannot-get-tuya-integration-to-work/226356/41
+# 
+
+name: Meat
+options:
+  - Chicken
+  - Pork
+  - Lamb
+  - Beef
+  - Venison
+  - Brisket
+initial: Brisket
+icon: mdi:cow

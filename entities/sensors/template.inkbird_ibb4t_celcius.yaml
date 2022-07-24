@@ -1,0 +1,33 @@
+---
+#
+# Convert the degrees Fahrenheit measurements from the iBBQ-4T bbq thermometer to Celcius
+# This should be happening automatically but...it isnt'. 
+# @author Michael Greenhill
+# @updated 2022-07-13
+#
+
+platform: template
+sensors:
+  ibbq4t_probe_1_temperature_c:
+    friendly_name: iBBQ-4T Probe 1 temperature C
+    unit_of_measurement: "°C"
+    unique_id: '64485f8e-6f25-48fb-8a7d-18e3e118f67e'
+    value_template: '{{ "%.2f"|format((( states("sensor.probe_1_temperature") | float ) -32) *5/9) }}'
+    
+  ibbq4t_probe_2_temperature_c:
+    friendly_name: iBBQ-4T Probe 2 temperature C
+    unit_of_measurement: "°C"
+    unique_id: 'c56af682-93cb-4597-a541-ff29c7913c14'
+    value_template: '{{ "%.2f"|format((( states("sensor.probe_2_temperature") | float ) -32) *5/9) }}'
+    
+  ibbq4t_probe_3_temperature_c:
+    friendly_name: iBBQ-4T Probe 3 temperature C
+    unit_of_measurement: "°C"
+    unique_id: '47a2daf1-82e7-45ad-a8fd-7d09243c6805'
+    value_template: '{{ "%.2f"|format((( states("sensor.probe_3_temperature") | float ) -32) *5/9) }}'
+    
+  ibbq4t_probe_4_temperature_c:
+    friendly_name: iBBQ-4T Probe 4 temperature C
+    unit_of_measurement: "°C"
+    unique_id: 'ec1e4d1a-200d-4d12-a4b3-93cf1744ab3c'
+    value_template: '{{ "%.2f"|format((( states("sensor.probe_4_temperature") | float ) -32) *5/9) }}'
