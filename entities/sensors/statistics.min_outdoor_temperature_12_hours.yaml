@@ -9,5 +9,6 @@ name: Outdoor min temperature last 12 hours
 unique_id: "min_outdoor_temperature_12_hours"
 entity_id: sensor.frontdoor_temperature
 state_characteristic: value_min
+sampling_size: 200000
 max_age: 
   hours: 12

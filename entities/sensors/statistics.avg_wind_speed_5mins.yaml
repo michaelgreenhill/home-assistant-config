@@ -13,5 +13,5 @@ entity_id: sensor.backyard_anemometer_average_wind_speed
 state_characteristic: mean
 max_age:
   minutes: 5
-sampling_size: 50
+sampling_size: 5000
 precision: 1

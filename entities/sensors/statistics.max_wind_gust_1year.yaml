@@ -1,0 +1,10 @@
+---
+
+platform: statistics
+name: Maximum wind gust speed over the last year
+unique_id: "15ba7ee0-0ab4-41b0-a8a9-3adad642c232"
+entity_id: sensor.backyard_anemometer_max_wind_speed
+state_characteristic: value_max
+sampling_size: 240000000
+max_age: 
+  days: 365

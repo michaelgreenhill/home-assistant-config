@@ -1,0 +1,10 @@
+---
+
+platform: statistics
+name: Rainfall over the last 30 days
+unique_id: "152a9f68-3b2c-4bdb-9f12-6dd9eafd66c7"
+entity_id: sensor.backyard_rainfall_meter_rt
+state_characteristic: value_max
+sampling_size: 200000000
+max_age: 
+  days: 30

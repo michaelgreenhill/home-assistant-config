@@ -1,8 +1,8 @@
 ---
 
 platform: statistics
-name: Average wind speed over the last 24 hours
-unique_id: "avg_wind_speed_24hours"
+name: Maximum wind speed over the last 24 hours
+unique_id: "5b4de24d-3512-491d-954f-0f05e874117a"
 entity_id: sensor.backyard_anemometer_average_wind_speed
 state_characteristic: value_max
 sampling_size: 200000
