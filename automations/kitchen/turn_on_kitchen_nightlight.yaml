@@ -10,27 +10,19 @@ trigger:
   entity_id: binary_sensor.lumi_lumi_sensor_motion_7b9b4305_ias_zone
   domain: binary_sensor
 condition:
-- condition: device
-  type: is_off
-  device_id: a8b64e55ded335ad42689a13a8a10a6b
-  entity_id: light.kitchen_2
-  domain: light
-- condition: time
-  before: 05:00:00
-  after: '23:00:00'
-  weekday:
-  - mon
-  - tue
-  - wed
-  - thu
-  - fri
-  - sat
-  - sun
-- condition: device
-  type: is_off
-  device_id: 21f7fe7a58392131a46357cf7e6007ba
-  entity_id: light.living_room
-  domain: light
+  - condition: device
+    type: is_off
+    device_id: a8b64e55ded335ad42689a13a8a10a6b
+    entity_id: light.kitchen_2
+    domain: light
+  - condition: state
+    entity_id: schedule.nightlight_hours
+    state: "on"
+  - condition: device
+    type: is_off
+    device_id: 21f7fe7a58392131a46357cf7e6007ba
+    entity_id: light.living_room
+    domain: light
 action:
 - service: hue.hue_activate_scene
   data:

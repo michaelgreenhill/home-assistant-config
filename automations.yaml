@@ -27,3 +27,101 @@
       player: media_player.nesthub8797
       view: bbq
       dashboard: lovelace-home
+- id: '1663470850710'
+  alias: Toggle the shed power supply via NFC tag
+  description: Toggles power to the shed when an NFC tag on the doorframe is scanned.
+  trigger:
+  - platform: tag
+    tag_id: dddac7f3-1876-4bd1-9cd3-ecd15772afad
+  condition: []
+  action:
+  - type: toggle
+    device_id: 3d82efb363d044ccb300cd8b66e59865
+    entity_id: switch.freezer
+    domain: switch
+  mode: single
+- id: '1663471160340'
+  alias: Toggle shed floodlight with NFC tag
+  description: Turns on or off the shed floodlight when NFC tags on the wood rack
+    or below the front steps are scanned with the Home Assistant app.
+  trigger:
+  - platform: tag
+    tag_id: 5206cd75-d4e4-4617-819d-26aebc3993cc
+  - platform: tag
+    tag_id: 5acff711-0d25-4f81-94d2-42e2814e3db0
+  condition: []
+  action:
+  - service: switch.toggle
+    data: {}
+    target:
+      entity_id: switch.shed_floodlight
+  mode: single
+- id: '1663911359602'
+  alias: Alarm - Arm away
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - person.freya
+    from: home
+  - platform: state
+    entity_id:
+    - person.michael
+    from: home
+  - platform: state
+    entity_id:
+    - lock.front_door_lock_8cfff910_door_lock
+    to: locked
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: person.freya
+      state: home
+    - condition: state
+      entity_id: person.michael
+      state: home
+    enabled: true
+  action:
+  - service: alarm_control_panel.alarm_arm_away
+    data: {}
+    target:
+      entity_id: alarm_control_panel.alarmo
+  mode: single
+- id: '1663911489763'
+  alias: Alarm - Disarm
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - lock.front_door_lock_8cfff910_door_lock
+    to: unlocked
+  condition: []
+  action:
+  - service: alarmo.disarm
+    data:
+      entity_id: alarm_control_panel.alarmo
+  mode: single
+- id: '1663915238474'
+  alias: Alarm - Arm home
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - lock.front_door_lock_8cfff910_door_lock
+    to: locked
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: person.freya
+      state: home
+    - condition: state
+      entity_id: person.michael
+      state: home
+  action:
+  - service: alarm_control_panel.alarm_arm_home
+    data: {}
+    target:
+      entity_id: alarm_control_panel.alarmo
+  mode: single

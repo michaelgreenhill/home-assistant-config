@@ -4,33 +4,25 @@ id: '1650605718204'
 alias: Laundry - Turn on dim lights at night with motion
 description: ''
 trigger:
-- type: motion
-  platform: device
-  device_id: adf55e9c67a1d24e1381a322bd5cb035
-  entity_id: binary_sensor.lumi_lumi_sensor_motion_ias_zone
-  domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: adf55e9c67a1d24e1381a322bd5cb035
+    entity_id: binary_sensor.lumi_lumi_sensor_motion_ias_zone
+    domain: binary_sensor
 condition:
-- condition: time
-  before: 05:00:00
-  after: '23:00:00'
-  weekday:
-  - mon
-  - tue
-  - wed
-  - thu
-  - fri
-  - sat
-  - sun
-- condition: device
-  type: is_off
-  device_id: dd9925129896c0ef1b24d2c784344190
-  entity_id: light.laundry
-  domain: light
-- condition: device
-  type: is_off
-  device_id: 21f7fe7a58392131a46357cf7e6007ba
-  entity_id: light.living_room
-  domain: light
+  - condition: state
+    entity_id: schedule.nightlight_hours
+    state: "on"
+  - condition: device
+    type: is_off
+    device_id: dd9925129896c0ef1b24d2c784344190
+    entity_id: light.laundry
+    domain: light
+  - condition: device
+    type: is_off
+    device_id: 21f7fe7a58392131a46357cf7e6007ba
+    entity_id: light.living_room
+    domain: light
 action:
 - service: hue.hue_activate_scene
   data:
