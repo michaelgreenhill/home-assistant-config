@@ -118,6 +118,34 @@ cards:
         styles:
           name:
             - margin-top: 1rem
+      - type: 'custom:button-card'
+        entity: alarm_control_panel.alarmo
+        name: 'Alarm'
+        icon: mdi:lock
+        size: 50px
+        state:
+          - value: "armed"
+            color: green
+            icon: mdi:lock
+            tap_action:
+              action: call-service
+              service: lock.unlock
+              service_data:
+                  entity_id: lock.front_door_lock_8cfff910_door_lock
+          - value: "disarmed"
+            color: red
+            icon: mdi:lock-open-variant
+            tap_action:
+              action: call-service
+              service: lock.lock
+              service_data:
+                entity_id: lock.front_door_lock_8cfff910_door_lock
+        view_layout:
+          grid-column: auto / span 2
+          grid-row: auto / span 2
+        styles:
+          name:
+            - margin-top: 1rem
       - type: weather-forecast
         entity: weather.belgrave
         secondary_info_attribute: humidity
